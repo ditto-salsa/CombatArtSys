@@ -3,8 +3,9 @@
 #include "Tools/Tool Helpers.txt"
 #include "DittoASMDefs.event" // Required for Calc Loop installations.
 
+
 // Text
-#include "Text.event" // Adds the necessary text for menus, IDs can be changed here.
+#include "Text.event" // Adds the necessary text for menus, IDs can be changed here. - Contains the Anti-Huffman engine hack
 
 // Item Range Fix
 #include "ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.

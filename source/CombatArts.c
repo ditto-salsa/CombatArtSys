@@ -41,12 +41,9 @@ int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord){
     return returnedRangeWord;
 }
 
-// Menu routines aaaaaaaaaaaaaaaaaaaaaa
+// Menu routines
 
 u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number){
-
-    // should probably remove this when releasing the code
-    if (CombatArtList[0].menuUsability == NULL) return MENU_ENABLED;
 
     bool anyArtsUsable = FALSE;
 
@@ -54,7 +51,7 @@ u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number){
 
         if (CombatArtList[i].menuUsability == NULL) continue;
 
-        if (CombatArtList[i].menuUsability(NULL, 0) == TRUE){
+        if (CombatArtList[i].menuUsability() == TRUE){
             anyArtsUsable = TRUE;
             break;
         }
