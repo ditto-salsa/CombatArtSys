@@ -1,0 +1,26 @@
+// Definition files
+#include "EAstdlib.event"
+#include "Tools/Tool Helpers.txt"
+#include "DittoASMDefs.event" // Required for Calc Loop installations.
+
+// Text
+#include "Text.event" // Adds the necessary text for menus, IDs can be changed here.
+
+// Item Range Fix
+#include "ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.
+
+// Calc Loops
+#include "CalcLoops/PrebattleCalcLoop.event"
+#include "CalcLoops/PostbattleCalcLoop.event"
+#include "CalcLoops/BattleProcCalcLoop.event"
+#include "CalcLoops/RangeCalcLoop.event"
+
+// Menus
+#include "MenuDefs/_Installer.event"
+
+// Combat Art data - edit your arts here
+#include "CombatArts.event"
+
+// Code
+#include "source/CombatArts.lyn.event"
+#include "source/CombatArtFunctionLib.lyn.event"

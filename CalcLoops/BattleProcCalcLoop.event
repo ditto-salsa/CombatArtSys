@@ -1,0 +1,168 @@
+ALIGN 4; BattleProcFunctions: // Make sure to set THUMB bit if running THUMB code!
+POIN CombatArtBattleProcFuncIterator
+WORD 0 // Terminator
+
+// --- Wizardry line ---
+
+PUSH
+ORG 0x2B3EC
+jumpToHack(r2, BattleProcCalcLoop)
+POP
+
+ThumbFunc(BattleProcCalcLoop)
+SHORT 0xB5F0 0x4657 0x464E 0x4645 0xB4E0 0x4681 0x468A 0x4F2A
+SHORT 0x4E2A 0x2000 0x80B0 0x8970 0x2101 0x4C29 0xF000 0xF84B
+SHORT 0x2800 0xD10A 0x683B 0x681A 0x0351 0x0B49 0x2002 0x4301
+SHORT 0x4824 0x4010 0x4308 0x6018 0xE018 0x88F0 0x8931 0x1A40
+SHORT 0x80B0 0x4C21 0x89B0 0x2100 0xF000 0xF835 0x2800 0xD00D
+SHORT 0x683B 0x681A 0x0351 0x0B49 0x2001 0x4301 0x4819 0x4010
+SHORT 0x4308 0x6018 0x88B0 0x2103 0x4348 0x80B0 0x4D17 0x46B0
+SHORT 0x2600 0x59AC 0x2C00 0xD007 0x4648 0x4651 0x1C3A 0x4643
+SHORT 0xF000 0xF819 0x3604 0xE7F4 0x4646 0x88B2 0x2A7F 0xDD01
+SHORT 0x207F 0x80B0 0x2A00 0xDA01 0x2000 0x80B0 0x2A00 0xD003
+SHORT 0x464B 0x217C 0x2001 0x5458 0xBCE0 0x46A8 0x46B1 0x46BA
+SHORT 0xBCF0 0xBC01 0x4700 0x4720
+WORD 0x0203A608 0x0203A4D4
+POIN 0x2A559
+WORD 0xFFF80000
+POIN 0x2A52D BattleProcFunctions
+
+/*
+.thumb
+
+.set gBattleHitIterator, LiteralPool
+.set gBattleStats, LiteralPool+4
+.set BattleRoll2RN, LiteralPool+8
+.set AttributeBitmask, LiteralPool+12
+.set BattleRoll1RN, LiteralPool+16
+.set FunctionList, EALiterals
+
+// things needed during the loop: FunctionList, offset tracker, gBattleActor, gBattleTarget, gBattleHitIterator, gBattleStats
+
+push {r4, r5, r6, r7, r14}
+mov r7, r10
+mov r6, r9
+mov r5, r8
+push {r5, r6, r7}
+
+// BattleGenerateHitAttributes start section
+mov r9, r0
+mov r10, r1
+ldr r7, gBattleHitIterator
+ldr r6, gBattleStats
+
+mov r0, #0
+strh r0, [r6, #0x4] // gBattleStats.damage = 0
+
+ldrh r0, [r6, #0xA]
+mov r1, #0x1
+ldr r4, BattleRoll2RN
+bl bx_r4
+cmp r0, #0
+bne Hit
+
+Miss: // fallthrough
+ldr r3, [r7]
+ldr r2, [r3]
+lsl r1, r2, #0xD
+lsr r1, r1, #0xD
+mov r0, #0x2 // set the miss attribute flag
+orr r1, r0
+ldr r0, AttributeBitmask
+and r0, r2
+orr r0, r1
+str r0, [r3]
+b LoopInit
+
+Hit:
+// gBattleStats.damage = gBattleStats.attack - gBattleStats.defense
+ldrh r0, [r6, #0x6]
+ldrh r1, [r6, #0x8]
+sub r0, r0, r1
+strh r0, [r6, #0x4]
+// if (BattleRoll1RN(gBattleStats.critRate, FALSE) == TRUE)
+ldr r4, BattleRoll1RN
+ldrh r0, [r6, #0xC]
+mov r1, #0
+bl bx_r4
+cmp r0, #0
+beq LoopInit
+// gBattleHitIterator->attributes |= BATTLE_HIT_ATTR_CRIT
+ldr r3, [r7]
+ldr r2, [r3]
+lsl r1, r2, #0xD
+lsr r1, r1, #0xD
+mov r0, #0x1 // set the crit attribute flag
+orr r1, r0
+ldr r0, AttributeBitmask
+and r0, r2
+orr r0, r1
+str r0, [r3]
+// gBattleStats.damage *= 3
+ldrh r0, [r6, #0x4]
+mov r1, #0x3
+mul r0, r1
+strh r0, [r6, #0x4]
+
+LoopInit:
+// r4 will be loaded with the function to run, r5 = FunctionList, r6 = offset tracker, r7 = gBattleHitIterator, r8 = gBattleStats, r9 = gBattleActor and r10 = gBattleTarget
+ldr r5, FunctionList
+mov r8, r6
+mov r6, #0
+// did a lot of this setup in the beginning, so not much here
+Loop:
+ldr r4, [r5, r6]
+cmp r4, #0 // null terminated list
+beq EndLoop
+mov r0, r9
+mov r1, r10
+mov r2, r7
+mov r3, r8
+bl bx_r4
+add r6, #0x4
+b Loop
+
+EndLoop:
+mov r6, r8
+ldrh r2, [r6, #0x4]
+
+cmp r2, #0x7F
+ble DontCapDamage
+	mov r0, #0x7F
+	strh r0, [r6, #0x4]
+DontCapDamage:
+
+cmp r2, #0
+bge DontFloorDamage
+	mov r0, #0
+	strh r0, [r6, #0x4]
+DontFloorDamage:
+
+cmp r2, #0
+beq End
+	mov r3, r9
+	mov r1, #0x7C
+	mov r0, #0x1
+	strb r0, [r3, r1] // attacker->nonZeroDamage = TRUE
+
+End:
+pop {r5, r6, r7}
+mov r8, r5
+mov r9, r6
+mov r10, r7
+pop {r4, r5, r6, r7}
+pop {r0}
+bx r0
+
+bx_r4:
+bx r4
+
+.align
+LiteralPool:
+.word 0x0203A608
+.word 0x0203A4D4
+.word 0x0802A559
+.word 0xFFF80000
+.word 0x0802A52D
+EALiterals:
+*/

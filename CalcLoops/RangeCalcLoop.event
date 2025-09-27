@@ -1,0 +1,50 @@
+ALIGN 4; RangeFunctions:
+POIN CombatArtRangeFuncIterator
+WORD 0 // Terminator
+
+// -- Wizardry line --
+
+ThumbFunc(RangeCalcLoop)
+SHORT 0xB5F0 0x1C04 0x1C0D 0x1C16 0x4F07 0x683B 0x2B00 0xD007 0x1C20 0x1C29 0x1C32 0xF000 0xF806 0x1C06 0x3704 0xE7F4 0x1C30 0xBCF0 0xBC08 0x4718
+POIN RangeFunctions
+
+/*
+.thumb
+
+.set FunctionList, EALiterals
+
+@arguments:
+	@r0: unit pointer
+	@r1: item id
+	@r2: min max range word
+@returns
+	@r0: updated min max range word
+	
+push {r4, r5, r6, r7, r14}
+
+mov r4, r0
+mov r5, r1
+mov r6, r2
+ldr r7, FunctionList
+Loop:
+ldr r3, [r7]
+cmp r3, #0
+beq End
+mov r0, r4
+mov r1, r5
+mov r2, r6
+bl bx_r3
+mov r6, r0
+add r7, #0x4
+b Loop
+
+End:
+mov r0, r6
+pop {r4, r5, r6, r7}
+pop {r3}
+bx_r3:
+bx r3
+
+.align
+EALiterals:
+*/

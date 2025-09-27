@@ -1,0 +1,16 @@
+#define NL "BYTE 1"
+#define End "BYTE 0"
+#define UM_CombatArtsMenuName 0xCD
+#define UM_CombatArtsMenuDesc 0xCE
+
+ALIGN 4; UM_CombatArtsMenuName_Text:
+String(" Combat Arts"); End
+setText(UM_CombatArtsMenuName,UM_CombatArtsMenuName_Text)
+
+ALIGN 4; UM_CombatArtsMenuDesc_Text:
+String("Expend durability of weapons or items"); NL
+String("to use powerful abilities that you've learned."); End
+setText(UM_CombatArtsMenuDesc,UM_CombatArtsMenuDesc_Text)
+
+#undef NL
+#undef End

@@ -1,0 +1,51 @@
+ALIGN 4; PreBattleFunctions: // Make sure to set the THUMB bit!!
+POIN 0x2AC61 0x2AC91 0x2ACF9 0x2ADCD // Vanilla functions
+POIN CombatArtPrebattleFuncIterator
+WORD 0 // Terminator
+
+// --- Wizardry line ---
+//Pre battle calc loop code, inserted inline, source below
+PUSH
+ORG 0x2A9A8
+SHORT 0xB5F0
+ORG 0x2A9AE
+SHORT 0x4E07 0x2700 0x59F2 0x2A00 0xD005 0x1C29
+ORG 0x2A9BC
+SHORT 0xF0A6 0xFF84 0x3704 0xE7F6 0xBCF0 0xBC01 0x4700
+ORG 0x2A9CC
+POIN PreBattleFunctions
+POP
+
+/*
+.thumb
+
+.set FunctionList, EALiterals
+
+push {r4, r5, r6, r7, r14}
+// bunitActor in r4, bunitTarget in r5
+mov r4, r0
+mov r5, r1
+
+// keep pointer to FunctionList in r6, offset tracker in r7
+ldr r6, FunctionList
+mov r7, #0
+
+Loop:
+ldr r2, [r6, r7]
+cmp r2, #0 // null terminated pointer list
+beq End
+mov r1, r5
+mov r0, r4
+bl bx_r2 // using bl to bx trampoline here so that arm code *can* be called if desired
+add r7, #4
+b Loop
+
+End:
+pop {r4, r5, r6, r7}
+pop {r0}
+bx r0
+
+.align
+EALiterals:
+
+*/

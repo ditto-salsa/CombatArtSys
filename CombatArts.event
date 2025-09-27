@@ -1,0 +1,21 @@
+#define CombatArt(id,name, desc, usability, draw, effect, prebattle, postbattle, battleproc, rangefunc) \
+"PUSH; ORG CombatArtList+(id*0x20); SHORT name desc; POIN usability draw effect prebattle postbattle battleproc rangefunc; POP"
+ALIGN 4; CombatArtList: FILL 0x20*0x17F
+
+// List of combat arts, appear in menus in the order they are here
+// Leave any field as 0 that you are not using
+
+/* Example:
+CombatArt(0, \ // ID
+		  john, \ // Name
+		  jones, \ // Desc
+		  epicpointer, \ // Menu Usability
+		  omgpointerhi, \ // Menu Draw
+		  epicpointer2, \ // Menu Effect
+		  somewhatepicpointer, \ // Pre Battle Function
+		  againapointer, \ // Post Battle Function
+		  fifthhack, \ // Battle Proc Function
+		  aaaaaaaaaaaa) // Range Function
+*/
+
+CombatArt(0,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Early Terminator, make the ID for this be after your last entry to speed up searching through each art
