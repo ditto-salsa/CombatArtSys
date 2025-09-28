@@ -3,72 +3,16 @@ POIN CombatArtPostbattleFuncIterator
 WORD 0 // Terminator
 
 
-// --- Wizardry line ---
 
+
+
+
+// Hook & Code
 PUSH
 ORG 0x37748
 jumpToHack(r1,PostbattleCalcLoop)
 POP
 
 ThumbFunc(PostbattleCalcLoop)
-SHORT 0xB4F0 0x4C0D 0x4D11 0x2600 0x4F0C 0x210D 0x5878 0x4B0C 0xF000 0xF810 0x1C01 0x6820 0x1C3A 0x59AB 0x2B00 0xD003 0xF000 0xF808 0x3604 0xE7F0 0x4B06 0x6820 0xF000 0xF802 0xBCF0 0x4B05 0x4718 0x46C0
-WORD 0x03004E50 0x0203A958
-POIN 0x19431 0x19151 0x37751 PostBattleFunctions
-
-/*
-.thumb
-
-.set gActiveUnit, LiteralPool
-.set gActionData, LiteralPool+4
-.set GetUnit, LiteralPool+8
-.set GetUnitCurrentHp, LiteralPool+12
-.set ReturnAddress, LiteralPool+16
-.set FunctionList, EALiterals
-
-// passing in gActiveUnit in r0, GetUnit(gActionData.targetIndex) in r1, gActionData in r2
-push {r4, r5, r6, r7}
-
-ldr r4, gActiveUnit
-ldr r5, FunctionList
-mov r6, #0
-ldr r7, gActionData
-
-Loop:
-mov r1, #0xD
-ldr r0, [r7, r1] // targetIndex
-ldr r3, GetUnit
-bl bx_r3
-mov r1, r0
-ldr r0, [r4]
-mov r2, r7
-
-ldr r3, [r5, r6]
-cmp r3, #0
-beq End
-bl bx_r3
-add r6, #4
-b Loop
-
-End:
-// returning to the hooked function, need 0x3004E50 in r4, result of GetUnitCurrentHp when passing in dereference to r4, in r0
-// return address is 0x37750
-ldr r3, GetUnitCurrentHp
-ldr r0, [r4]
-bl bx_r3
-
-pop {r4, r5, r6, r7}
-
-ldr r3, ReturnAddress
-bx_r3:
-bx r3
-
-.align
-LiteralPool:
-.word 0x03004E50
-.word 0x0203A958
-.word 0x08019431
-.word 0x08019151
-.word 0x08037751
-EALiterals:
-
-*/
+#incbin "asm/PostbattleCalcLoop.bin"
+POIN PostBattleFunctions

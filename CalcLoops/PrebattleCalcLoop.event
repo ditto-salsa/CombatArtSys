@@ -1,10 +1,14 @@
-ALIGN 4; PreBattleFunctions: // Make sure to set the THUMB bit!!
+ALIGN 4; PreBattleFunctions: // Make sure to set THUMB bit if running THUMB code!
 POIN 0x2AC61 0x2AC91 0x2ACF9 0x2ADCD // Vanilla functions
 POIN CombatArtPrebattleFuncIterator
 WORD 0 // Terminator
 
-// --- Wizardry line ---
-//Pre battle calc loop code, inserted inline, source below
+
+
+
+
+// Hook & Code
+// Pre battle calc loop code, inserted inline, source below
 PUSH
 ORG 0x2A9A8
 SHORT 0xB5F0
@@ -47,5 +51,4 @@ bx r0
 
 .align
 EALiterals:
-
 */
