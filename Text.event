@@ -8,8 +8,9 @@ String(" Combat Arts"); End
 setText(UM_CombatArtsMenuName,UM_CombatArtsMenuName_Text)
 
 ALIGN 4; UM_CombatArtsMenuDesc_Text:
-String("Expend durability of weapons or items"); NL
-String("to use powerful abilities that you've learned."); End
+String("Expend durability of weapons"); NL
+String("or items to use powerful abilities"); NL
+String("that you've learned."); End
 setText(UM_CombatArtsMenuDesc,UM_CombatArtsMenuDesc_Text)
 
 #undef NL

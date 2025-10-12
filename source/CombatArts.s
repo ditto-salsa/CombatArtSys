@@ -38,7 +38,7 @@ CombatArtPrebattleFuncIterator:
 @ source/CombatArts.c:9:     for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp128, _15,
 	beq	.L1		@,
-	adds	r4, r4, #48	@ ivtmp.18,
+	adds	r4, r4, #48	@ ivtmp.19,
 @ source/CombatArts.c:10:         if (CombatArtList[i].preBattleFunction == NULL) continue;
 	cmp	r3, #0	@ _15,
 	beq	.L3		@,
@@ -48,18 +48,18 @@ CombatArtPrebattleFuncIterator:
 	movs	r0, r5	@, BattleActor
 	bl	.L23		@
 @ source/CombatArts.c:9:     for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
-	ldr	r3, [r4]	@ _15,* ivtmp.18
+	ldr	r3, [r4]	@ _15,* ivtmp.19
 @ source/CombatArts.c:9:     for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp129, _15,
 	beq	.L1		@,
 .L18:
-	adds	r4, r4, #32	@ ivtmp.18,
+	adds	r4, r4, #32	@ ivtmp.19,
 @ source/CombatArts.c:10:         if (CombatArtList[i].preBattleFunction == NULL) continue;
 	cmp	r3, #0	@ _15,
 	bne	.L20		@,
 .L3:
 @ source/CombatArts.c:9:     for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
-	ldr	r3, [r4]	@ _15,* ivtmp.18
+	ldr	r3, [r4]	@ _15,* ivtmp.19
 @ source/CombatArts.c:9:     for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp130, _15,
 	bne	.L18		@,
@@ -96,7 +96,7 @@ CombatArtPostbattleFuncIterator:
 @ source/CombatArts.c:17:     for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp130, _16,
 	beq	.L24		@,
-	adds	r4, r4, #52	@ ivtmp.27,
+	adds	r4, r4, #52	@ ivtmp.28,
 @ source/CombatArts.c:18:         if (CombatArtList[i].postBattleFunction == NULL) continue;
 	cmp	r3, #0	@ _16,
 	beq	.L26		@,
@@ -107,18 +107,18 @@ CombatArtPostbattleFuncIterator:
 	movs	r0, r5	@, actor
 	bl	.L23		@
 @ source/CombatArts.c:17:     for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
-	ldr	r3, [r4]	@ _16,* ivtmp.27
+	ldr	r3, [r4]	@ _16,* ivtmp.28
 @ source/CombatArts.c:17:     for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp131, _16,
 	beq	.L24		@,
 .L41:
-	adds	r4, r4, #32	@ ivtmp.27,
+	adds	r4, r4, #32	@ ivtmp.28,
 @ source/CombatArts.c:18:         if (CombatArtList[i].postBattleFunction == NULL) continue;
 	cmp	r3, #0	@ _16,
 	bne	.L42		@,
 .L26:
 @ source/CombatArts.c:17:     for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
-	ldr	r3, [r4]	@ _16,* ivtmp.27
+	ldr	r3, [r4]	@ _16,* ivtmp.28
 @ source/CombatArts.c:17:     for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
 	adds	r2, r3, #1	@ tmp132, _16,
 	bne	.L41		@,
@@ -160,7 +160,7 @@ CombatArtBattleProcFuncIterator:
 @ source/CombatArts.c:25:     for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
 	adds	r3, r4, #1	@ tmp132, _17,
 	beq	.L45		@,
-	adds	r5, r5, #56	@ ivtmp.35,
+	adds	r5, r5, #56	@ ivtmp.36,
 @ source/CombatArts.c:26:         if (CombatArtList[i].battleProcFunction == NULL) continue;
 	cmp	r4, #0	@ _17,
 	beq	.L47		@,
@@ -172,18 +172,18 @@ CombatArtBattleProcFuncIterator:
 	movs	r0, r6	@, BattleActor
 	bl	.L66		@
 @ source/CombatArts.c:25:     for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
-	ldr	r4, [r5]	@ _17,* ivtmp.35
+	ldr	r4, [r5]	@ _17,* ivtmp.36
 @ source/CombatArts.c:25:     for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
 	adds	r3, r4, #1	@ tmp133, _17,
 	beq	.L45		@,
 .L62:
-	adds	r5, r5, #32	@ ivtmp.35,
+	adds	r5, r5, #32	@ ivtmp.36,
 @ source/CombatArts.c:26:         if (CombatArtList[i].battleProcFunction == NULL) continue;
 	cmp	r4, #0	@ _17,
 	bne	.L63		@,
 .L47:
 @ source/CombatArts.c:25:     for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
-	ldr	r4, [r5]	@ _17,* ivtmp.35
+	ldr	r4, [r5]	@ _17,* ivtmp.36
 @ source/CombatArts.c:25:     for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
 	adds	r3, r4, #1	@ tmp134, _17,
 	bne	.L62		@,
@@ -222,7 +222,7 @@ CombatArtRangeFuncIterator:
 @ source/CombatArts.c:35:     for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
 	adds	r1, r3, #1	@ tmp133, _20,
 	beq	.L67		@,
-	adds	r4, r4, #60	@ ivtmp.43,
+	adds	r4, r4, #60	@ ivtmp.44,
 @ source/CombatArts.c:36:         if (CombatArtList[i].rangeFunction == NULL) continue;
 	cmp	r3, #0	@ _20,
 	beq	.L69		@,
@@ -232,20 +232,20 @@ CombatArtRangeFuncIterator:
 	movs	r0, r5	@, unit
 	bl	.L23		@
 @ source/CombatArts.c:35:     for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
-	ldr	r3, [r4]	@ _20,* ivtmp.43
+	ldr	r3, [r4]	@ _20,* ivtmp.44
 @ source/CombatArts.c:38:         returnedRangeWord = CombatArtList[i].rangeFunction(unit, itemID, returnedRangeWord);
 	movs	r2, r0	@ <retval>, <retval>
 @ source/CombatArts.c:35:     for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
 	adds	r1, r3, #1	@ tmp134, _20,
 	beq	.L67		@,
 .L81:
-	adds	r4, r4, #32	@ ivtmp.43,
+	adds	r4, r4, #32	@ ivtmp.44,
 @ source/CombatArts.c:36:         if (CombatArtList[i].rangeFunction == NULL) continue;
 	cmp	r3, #0	@ _20,
 	bne	.L82		@,
 .L69:
 @ source/CombatArts.c:35:     for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
-	ldr	r3, [r4]	@ _20,* ivtmp.43
+	ldr	r3, [r4]	@ _20,* ivtmp.44
 @ source/CombatArts.c:35:     for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
 	adds	r1, r3, #1	@ tmp135, _20,
 	bne	.L81		@,
@@ -279,7 +279,7 @@ UM_CombatArtsMenuUsability:
 @ source/CombatArts.c:50:     for (int i = 0; (int)CombatArtList[i].menuUsability != (-1); i++){
 	adds	r2, r3, #1	@ tmp129, _2,
 	beq	.L86		@,
-	adds	r4, r4, #36	@ ivtmp.51,
+	adds	r4, r4, #36	@ ivtmp.52,
 .L88:
 @ source/CombatArts.c:52:         if (CombatArtList[i].menuUsability == NULL) continue;
 	cmp	r3, #0	@ _2,
@@ -293,7 +293,7 @@ UM_CombatArtsMenuUsability:
 @ source/CombatArts.c:50:     for (int i = 0; (int)CombatArtList[i].menuUsability != (-1); i++){
 	ldr	r3, [r4]	@ _2, MEM[(u8 (*<T132f>) (void) *)_20]
 @ source/CombatArts.c:50:     for (int i = 0; (int)CombatArtList[i].menuUsability != (-1); i++){
-	adds	r4, r4, #32	@ ivtmp.51,
+	adds	r4, r4, #32	@ ivtmp.52,
 	adds	r2, r3, #1	@ tmp130, _2,
 	bne	.L88		@,
 .L86:
@@ -319,25 +319,65 @@ UM_CombatArtsMenuUsability:
 	.type	UM_CombatArtsMenuEffect, %function
 UM_CombatArtsMenuEffect:
 	@ Function supports interworking.
-	@ args = 0, pretend = 0, frame = 0
+	@ args = 0, pretend = 0, frame = 40
 	@ frame_needed = 0, uses_anonymous_args = 0
-	push	{r4, lr}	@
-@ source/CombatArts.c:67:     StartOrphanMenu(&CAMenuDef);
-	ldr	r0, .L103	@ tmp117,
-@ source/CombatArts.c:70: }
-	@ sp needed	@
-@ source/CombatArts.c:67:     StartOrphanMenu(&CAMenuDef);
-	ldr	r3, .L103+4	@ tmp118,
+	push	{r4, r5, r6, r7, lr}	@
+	mov	lr, r8	@,
+	push	{lr}	@
+@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * i)), sizeof(struct MenuItemDef));
+	ldr	r3, .L105	@ tmp137,
+	ldr	r4, [r3, #8]	@ ivtmp.63, CAMenuDef.menuItems
+	mov	r8, r3	@ tmp137, tmp137
+	ldr	r3, .L105+4	@ tmp144,
+	ldr	r7, .L105+8	@ tmp138,
+	ldr	r5, .L105+12	@ tmp139,
+@ source/CombatArts.c:66: u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){
+	sub	sp, sp, #40	@,,
+	adds	r6, r4, r3	@ _6, ivtmp.63, tmp144
+.L103:
+@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * i)), sizeof(struct MenuItemDef));
+	movs	r1, r4	@, ivtmp.63
+	movs	r2, #36	@,
+	movs	r0, r7	@, tmp138
+	bl	.L107		@
+@ source/CombatArts.c:69:     for (int i = 0; i < 5; i++){
+	movs	r3, #162	@ tmp145,
+	lsls	r3, r3, #3	@ tmp145, tmp145,
+	adds	r4, r4, r3	@ ivtmp.63, ivtmp.63, tmp145
+	cmp	r6, r4	@ _6, ivtmp.63
+	bne	.L103		@,
+@ source/CombatArts.c:74:     struct MenuItemDef terminator = MenuItemsEnd;
+	ldr	r3, .L105+16	@ tmp128,
+	movs	r2, #36	@,
+	movs	r1, #0	@,
+	add	r0, sp, #4	@ tmp147,,
 	bl	.L23		@
-@ source/CombatArts.c:70: }
+@ source/CombatArts.c:75:     MemCpy(&terminator, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * 5)), sizeof(struct MenuItemDef));
+	movs	r2, #36	@,
+	movs	r1, r6	@, _6
+	add	r0, sp, #4	@ tmp148,,
+	bl	.L107		@
+@ source/CombatArts.c:78:     StartOrphanMenu(&CAMenuDef);
+	mov	r0, r8	@, tmp137
+	ldr	r3, .L105+20	@ tmp135,
+	bl	.L23		@
+@ source/CombatArts.c:81: }
 	movs	r0, #55	@,
-	pop	{r4}
+	add	sp, sp, #40	@,,
+	@ sp needed	@
+	pop	{r7}
+	mov	r8, r7
+	pop	{r4, r5, r6, r7}
 	pop	{r1}
 	bx	r1
-.L104:
+.L106:
 	.align	2
-.L103:
+.L105:
 	.word	CAMenuDef
+	.word	6480
+	.word	CAMenu_FillerItemDef
+	.word	MemCpy
+	.word	memset
 	.word	StartOrphanMenu
 	.size	UM_CombatArtsMenuEffect, .-UM_CombatArtsMenuEffect
 	.align	1
@@ -352,7 +392,7 @@ CA_MenuArtFillerEntryUsability:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-@ source/CombatArts.c:75: }
+@ source/CombatArts.c:86: }
 	movs	r0, #1	@,
 	@ sp needed	@
 	bx	lr
@@ -369,7 +409,7 @@ CA_MenuArtFillerEntryDraw:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-@ source/CombatArts.c:79: }
+@ source/CombatArts.c:90: }
 	movs	r0, #0	@,
 	@ sp needed	@
 	bx	lr
@@ -386,7 +426,7 @@ CA_MenuArtFillerEntryEffect:
 	@ args = 0, pretend = 0, frame = 0
 	@ frame_needed = 0, uses_anonymous_args = 0
 	@ link register save eliminated.
-@ source/CombatArts.c:83: }
+@ source/CombatArts.c:94: }
 	movs	r0, #55	@,
 	@ sp needed	@
 	bx	lr
@@ -430,3 +470,5 @@ CA_MenuArtFillerEntrySwitchOut:
 	bx	r3
 .L66:
 	bx	r4
+.L107:
+	bx	r5

@@ -18,4 +18,16 @@ CombatArt(0, \ // ID
 		  aaaaaaaaaaaa) // Range Function
 */
 
-CombatArt(0,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Early Terminator, make the ID for this be after your last entry to speed up searching through each art
+CombatArt(0, \
+		  0x212, \
+		  0x212, \
+		  CA_MenuArtFillerEntryUsability, \
+		  0, \
+		  CA_MenuArtFillerEntryEffect, \
+		  0, \
+		  0, \
+		  0, \
+		  0)
+			
+CombatArt(1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Early Terminator, make the ID for this be after your last entry to speed up searching through each art
+CombatArt(0x17F,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))

@@ -6,7 +6,7 @@
 struct CombatArt {
     /* 00 */ u16 nameTextID;
     /* 02 */ u16 descTextID;
-    /* 04 */ u8 (*menuUsability)(); // Passed no parameters; is called when there is no specified def or number
+    /* 04 */ u8 (*menuUsability)(); // Passed no parameters due to being called at one point when there is no specified def or number
     /* 08 */ int(*menuDraw)(struct MenuProc* menu, struct MenuItemProc* menuItem);
     /* 0C */ u8 (*menuEffect)(struct MenuProc* menu, struct MenuItemProc* menuItem);
     /* 10 */ void (*preBattleFunction)(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget);

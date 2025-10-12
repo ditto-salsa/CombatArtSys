@@ -2,10 +2,11 @@
 #include "EAstdlib.event"
 #include "Tools/Tool Helpers.txt"
 #include "DittoASMDefs.event" // Required for Calc Loop installations.
+#include "Config.event"
 
-// Change to your own freespace
-#define FreeSpace 0xb2a610
-ORG FreeSpace
+#ifdef STANDALONE_BUILDFILE
+	ORG FreeSpace
+#endif
 
 // Text
 #include "Text.event" // Adds the necessary text for menus, IDs can be changed here. - Contains the Anti-Huffman engine hack

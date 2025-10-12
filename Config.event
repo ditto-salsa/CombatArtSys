@@ -1,0 +1,22 @@
+//
+//	Configuration file for CombatArtSys.
+//
+//	All toggleable options or things you may want to define are found here as so you don't have to poke around internals.
+//
+
+// Comment this out to include this as part of a pre-existing buildfile.
+#define STANDALONE_BUILDFILE
+
+// Definition of Free Space, for use as a standalone buildfile.
+#define FreeSpace 0xB2A610
+
+// Unit Menu placement/sizing:
+#define UnitMenuLeftXCoord 1
+#define UnitMenuRightXCoord 20
+// Lower values may cause issues with longer menu option names, so beware!
+#define UnitMenuWidth 9
+
+// Map Menu placement/sizing:
+#define MapMenuRightXCoord 20
+// Lower values may cause issues with longer menu option names, so beware!
+#define MapMenuWidth 9
