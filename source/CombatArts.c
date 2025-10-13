@@ -67,12 +67,12 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
 
     // Filling up the menu items in RAM, firstly these 5 actual options
     for (int i = 0; i < 5; i++){
-        MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * i)), sizeof(struct MenuItemDef));
+        MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + i), sizeof(struct MenuItemDef));
     }
-    
+
     // Then the terminator, which is all zeroes but I am not sure if ram is wiped to 0 on startup
     struct MenuItemDef terminator = MenuItemsEnd;
-    MemCpy(&terminator, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * 5)), sizeof(struct MenuItemDef));
+    MemCpy(&terminator, (struct MenuItemDef*)((&CAMenuDef)->menuItems + 5), sizeof(struct MenuItemDef));
 
     // Finally actually make the menu and pray everything works as intended
     StartOrphanMenu(&CAMenuDef);

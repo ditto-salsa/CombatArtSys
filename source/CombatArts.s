@@ -323,43 +323,43 @@ UM_CombatArtsMenuEffect:
 	@ frame_needed = 0, uses_anonymous_args = 0
 	push	{r4, r5, r6, r7, lr}	@
 	mov	lr, r8	@,
-	push	{lr}	@
-@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * i)), sizeof(struct MenuItemDef));
+@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + i), sizeof(struct MenuItemDef));
 	ldr	r3, .L105	@ tmp137,
 	ldr	r4, [r3, #8]	@ ivtmp.63, CAMenuDef.menuItems
+	movs	r6, r4	@ _6, ivtmp.63
 	mov	r8, r3	@ tmp137, tmp137
-	ldr	r3, .L105+4	@ tmp144,
-	ldr	r7, .L105+8	@ tmp138,
-	ldr	r5, .L105+12	@ tmp139,
 @ source/CombatArts.c:66: u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){
+	push	{lr}	@
+	ldr	r7, .L105+4	@ tmp138,
+	ldr	r5, .L105+8	@ tmp139,
 	sub	sp, sp, #40	@,,
-	adds	r6, r4, r3	@ _6, ivtmp.63, tmp144
+	adds	r6, r6, #180	@ _6,
 .L103:
-@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * i)), sizeof(struct MenuItemDef));
+@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + i), sizeof(struct MenuItemDef));
 	movs	r1, r4	@, ivtmp.63
 	movs	r2, #36	@,
 	movs	r0, r7	@, tmp138
+@ source/CombatArts.c:69:     for (int i = 0; i < 5; i++){
+	adds	r4, r4, #36	@ ivtmp.63,
+@ source/CombatArts.c:70:         MemCpy(&CAMenu_FillerItemDef, (struct MenuItemDef*)((&CAMenuDef)->menuItems + i), sizeof(struct MenuItemDef));
 	bl	.L107		@
 @ source/CombatArts.c:69:     for (int i = 0; i < 5; i++){
-	movs	r3, #162	@ tmp145,
-	lsls	r3, r3, #3	@ tmp145, tmp145,
-	adds	r4, r4, r3	@ ivtmp.63, ivtmp.63, tmp145
 	cmp	r6, r4	@ _6, ivtmp.63
 	bne	.L103		@,
 @ source/CombatArts.c:74:     struct MenuItemDef terminator = MenuItemsEnd;
-	ldr	r3, .L105+16	@ tmp128,
+	ldr	r3, .L105+12	@ tmp128,
 	movs	r2, #36	@,
 	movs	r1, #0	@,
-	add	r0, sp, #4	@ tmp147,,
+	add	r0, sp, #4	@ tmp145,,
 	bl	.L23		@
-@ source/CombatArts.c:75:     MemCpy(&terminator, (struct MenuItemDef*)((&CAMenuDef)->menuItems + (sizeof(struct MenuItemDef) * 5)), sizeof(struct MenuItemDef));
+@ source/CombatArts.c:75:     MemCpy(&terminator, (struct MenuItemDef*)((&CAMenuDef)->menuItems + 5), sizeof(struct MenuItemDef));
 	movs	r2, #36	@,
 	movs	r1, r6	@, _6
-	add	r0, sp, #4	@ tmp148,,
+	add	r0, sp, #4	@ tmp146,,
 	bl	.L107		@
 @ source/CombatArts.c:78:     StartOrphanMenu(&CAMenuDef);
 	mov	r0, r8	@, tmp137
-	ldr	r3, .L105+20	@ tmp135,
+	ldr	r3, .L105+16	@ tmp135,
 	bl	.L23		@
 @ source/CombatArts.c:81: }
 	movs	r0, #55	@,
@@ -374,7 +374,6 @@ UM_CombatArtsMenuEffect:
 	.align	2
 .L105:
 	.word	CAMenuDef
-	.word	6480
 	.word	CAMenu_FillerItemDef
 	.word	MemCpy
 	.word	memset
