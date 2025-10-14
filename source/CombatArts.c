@@ -45,7 +45,7 @@ int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord){
 
 u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number){
 
-    bool anyArtsUsable = FALSE;
+    u8 anyArtsUsable = FALSE;
 
     for (int i = 0; (int)CombatArtList[i].menuUsability != (-1); i++){
 
@@ -81,7 +81,7 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
 }
 
 
-u8 CA_MenuArtFillerEntryUsability(const struct MenuItemDef* def, int number){
+u8 CA_MenuArtFillerEntryUsability(){
     return MENU_ENABLED;
 }
 

@@ -25,7 +25,10 @@
 
 // Combat Art data - edit your arts here
 #include "CombatArts.event"
+#include "Custom/_Installer.event"
 
 // Code
+#include "source/VanillaFunctionEdits.lyn.event"
 #include "source/CombatArts.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
+#include "source/TestingCombatArts.lyn.event"

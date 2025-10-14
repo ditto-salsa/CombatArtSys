@@ -15,4 +15,6 @@ struct CombatArt {
     /* 1C */ int (*rangeFunction)(struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
 };
 
+#include "CombatArtFunctionLib.h"
+
 #endif // COMBAT_ARTS_H

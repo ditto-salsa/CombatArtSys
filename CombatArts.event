@@ -1,33 +1,38 @@
-#define CombatArt(id,name, desc, usability, draw, effect, prebattle, postbattle, battleproc, rangefunc) \
-"PUSH; ORG CombatArtList+(id*0x20); SHORT name desc; POIN usability draw effect prebattle postbattle battleproc rangefunc; POP"
-ALIGN 4; CombatArtList: FILL 0x20*0x17F
+#define CombatArt(id,name, desc, durabilityCost, usability, draw, effect, prebattle, postbattle, battleproc, rangefunc) \
+"PUSH; ORG CombatArtList+(id*0x20); SHORT name desc; POIN usability draw effect prebattle postbattle battleproc rangefunc; ORG CombatArtDurabilityList+id; BYTE durabilityCost; POP"
+ALIGN 4; CombatArtList: FILL 0x20*0x181
+ALIGN 4; CombatArtDurabilityList: FILL 0x181
 
-// List of combat arts, appear in menus in the order they are here
-// Leave any field as 0 that you are not using
+/*
+	List of combat arts, appear in menus in the order they are here
+	Leave any field as 0 that you are not using
 
-/* Example:
-CombatArt(0, \ // ID
-		  john, \ // Name
-		  jones, \ // Desc
-		  epicpointer, \ // Menu Usability
-		  omgpointerhi, \ // Menu Draw
-		  epicpointer2, \ // Menu Effect
-		  somewhatepicpointer, \ // Pre Battle Function
-		  againapointer, \ // Post Battle Function
-		  fifthhack, \ // Battle Proc Function
-		  aaaaaaaaaaaa) // Range Function
+	Example:
+	CombatArt(0, \ // ID
+			  john, \ // Name
+			  jones, \ // Desc
+			  3, \ // Durability Cost
+			  epicpointer, \ // Menu Usability
+			  omgpointerhi, \ // Menu Draw
+			  epicpointer2, \ // Menu Effect
+			  somewhatepicpointer, \ // Pre Battle Function
+			  againapointer, \ // Post Battle Function
+			  fifthhack, \ // Battle Proc Function
+			  aaaaaaaaaaaa) // Range Function
 */
 
 CombatArt(0, \
 		  0x212, \
 		  0x212, \
-		  CA_MenuArtFillerEntryUsability, \
+		  3, \
+		  BigAtkArtUsability, \
 		  0, \
-		  CA_MenuArtFillerEntryEffect, \
+		  BigAtkArtEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 			
-CombatArt(1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Early Terminator, make the ID for this be after your last entry to speed up searching through each art
-CombatArt(0x17F,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
+CombatArt(1, \ // Early Terminator, make the ID for this be after your last entry to speed up searching through each art
+(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
+CombatArt(0x180,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded

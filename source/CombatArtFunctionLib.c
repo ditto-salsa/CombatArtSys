@@ -2,6 +2,48 @@
 
 // Contains "helper" functions to be used in user code for combat arts
 
+extern const u8 CombatArtDurabilityList[];
+
+u8 CombatArtGeneralAttackingUsability() {
+    
+    // AttackCommandUsability but modified
+    if (gActiveUnit->state & US_HAS_MOVED) {
+        return MENU_NOTSHOWN;
+    }
+
+    if (gActiveUnit->state & US_IN_BALLISTA) {
+        return MENU_NOTSHOWN;
+    }
+
+    for (int i = 0; i < UNIT_ITEM_COUNT; i++) {
+        int item = gActiveUnit->items[i];
+
+        if (item == 0) {
+            break;
+        }
+
+        if (!(GetItemAttributes(item) & IA_WEAPON)) {
+            continue;
+        }
+
+        if (!CanUnitUseWeaponNow(gActiveUnit, item)) {
+            continue;
+        }
+        // Durability cost check for art
+        //if (CombatArtDurabilityList[gCurrentArtID] > ITEM_USES(item)){}
+
+        MakeTargetListForWeapon(gActiveUnit, item);
+        if (GetSelectTargetCount() == 0) {
+            continue;
+        }
+
+        return MENU_ENABLED;
+    }
+
+    return MENU_NOTSHOWN;
+}
+
+
 // Use in Prebattle Functions
 
 // Changes which defensive stat this attack is targetting
