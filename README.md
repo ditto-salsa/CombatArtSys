@@ -19,3 +19,4 @@ finish this section later
 - Ditto
 - Retina
 - Tequila/Lord Reyson/Teraspark for ItemRangeFix
+- Hextator and Nintenlord for Anti-Huffman
