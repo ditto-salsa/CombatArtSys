@@ -28,7 +28,21 @@
 #include "Custom/_Installer.event"
 
 // Code
-#include "source/VanillaFunctionEdits.lyn.event"
+
+ALIGN 4
+
+#if CAS_NumberOfArtsInMenuAtOnce > 9
+	ERROR "The upper limit for the number of arts in the menu at once is 9, because I don't want someone changing the number above this and whining at me."
+#endif
+
+NumberOfArtsInMenuAtOnce:
+WORD CAS_NumberOfArtsInMenuAtOnce
+
+NumberOfUsableArtsAtOnce:
+WORD CAS_NumberOfUsableArtsAtOnce
+
+//#include "source/VanillaFunctionEdits.lyn.event"
 #include "source/CombatArts.lyn.event"
+#include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"

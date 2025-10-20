@@ -92,17 +92,11 @@ PUSH
 
 POP
 
-// Combat Art internal stuff vvvvv
+// Combat Art internal stuff
 
 ALIGN 4
 
-MenuItemsTerminator:
-MenuItemsEnd
-
 // x, y, width, height, style, itemdefs, oninit, onEnd, onIdle, onBpress, onRpress, onHelpBox
 CAMenuDef:
-BYTE 1 3 9 0; WORD 0 0x02026E30 0 0 0; POIN 0x22861 0x4F521 0x4F459
+BYTE 1 3 9 0; WORD 0 CAS_RAM_START 0 0 0; POIN 0x22861 0x4F521 0x4F459
 
-// WORD 0; SHORT name desc; BYTE colour overrideID; ALIGN 4; POIN usability draw effect idle switchIn switchOut
-CAMenu_FillerItemDef: // Gets copied into RAM and filled with relevant stuff when needed.
-WORD 0 0 0; POIN CA_MenuArtFillerEntryUsability CA_MenuArtFillerEntryDraw CA_MenuArtFillerEntryEffect 0 CA_MenuArtFillerEntrySwitchIn CA_MenuArtFillerEntrySwitchOut

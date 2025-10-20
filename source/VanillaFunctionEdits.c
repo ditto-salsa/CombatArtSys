@@ -1,4 +1,4 @@
-#include "CombatArts.h"
+#include "../_include/gbafe.h"
 
 void RedrawMenu(struct MenuProc* proc)
 {
@@ -32,9 +32,9 @@ void RedrawMenu(struct MenuProc* proc)
         if (item->availability == MENU_DISABLED)
             Text_SetColor(&item->text, TEXT_COLOR_SYSTEM_GRAY);
 
-        //if (!item->def->nameMsgId)
-            //Text_DrawString(&item->text, item->def->name);
-        //else
+        if (!item->def->nameMsgId)
+            Text_DrawString(&item->text, item->def->name);
+        else
             Text_DrawString(&item->text, GetStringFromIndex(item->def->nameMsgId));
 
         PutText(
