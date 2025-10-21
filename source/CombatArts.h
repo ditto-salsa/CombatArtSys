@@ -18,8 +18,6 @@ struct CombatArt {
 
 extern struct CombatArt CombatArtList[];
 extern u8 CombatArtDurabilityList[];
-#define IsCombatArtListTerminator(index) (CombatArtList[(index)].nameTextID == (-1))
-#define IsNotCombatArtListTerminator(index) (CombatArtList[(index)].nameTextID != (-1))
 
 extern const struct MenuDef CAMenuDef;
 extern const int NumberOfArtsInMenuAtOnce;

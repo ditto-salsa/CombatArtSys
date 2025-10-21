@@ -92,11 +92,8 @@ PUSH
 
 POP
 
-// Combat Art internal stuff
-
-ALIGN 4
-
+// Combat Art main menu definition
 // x, y, width, height, style, itemdefs, oninit, onEnd, onIdle, onBpress, onRpress, onHelpBox
-CAMenuDef:
+ALIGN 4; CAMenuDef:
 BYTE 1 3 9 0; WORD 0 CAS_RAM_START 0 0 0; POIN 0x22861 0x4F521 0x4F459
 

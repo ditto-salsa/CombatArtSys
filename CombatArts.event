@@ -1,4 +1,4 @@
-#define CombatArt(id,name, desc, durabilityCost, menu_usability, menu_draw, menu_effect, prebattle, postbattle, battleproc, rangefunc) \
+#define CombatArt(id,name, desc, durabilityCost, usability, menu_usability, menu_draw, menu_effect, prebattle, postbattle, battleproc, rangefunc) \
 "PUSH; ORG CombatArtList+(id*0x24); \
 SHORT name desc; POIN usability menu_usability menu_draw menu_effect prebattle postbattle battleproc rangefunc; \
 ORG CombatArtDurabilityList+id; BYTE durabilityCost; POP"
@@ -29,6 +29,7 @@ CombatArt(0, \
 		  0x212, \
 		  3, \
 		  BigAtkArtUsability, \
+		  BigAtkArtUsability, \
 		  0, \
 		  BigAtkArtEffect, \
 		  0, \
@@ -36,5 +37,5 @@ CombatArt(0, \
 		  0, \
 		  0)
 			
-CombatArt(1, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
-CombatArt(0x180,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
+CombatArt(1, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
+CombatArt(0x180,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded

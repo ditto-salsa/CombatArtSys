@@ -4,7 +4,7 @@
 
 // Function iterators to be put into calc loops
 void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget){
-    for (int i = 0; IsNotCombatArtListTerminator(i); i++){
+    for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
         if (CombatArtList[i].preBattleFunction == NULL) continue;
 
         CombatArtList[i].preBattleFunction(BattleActor, BattleTarget);
@@ -12,7 +12,7 @@ void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct Battl
 }
 
 void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, struct ActionData* ad){
-    for (int i = 0; IsNotCombatArtListTerminator(i); i++){
+    for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
         if (CombatArtList[i].postBattleFunction == NULL) continue;
 
         CombatArtList[i].postBattleFunction(actor, target, ad);
@@ -20,7 +20,7 @@ void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, st
 }
 
 void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs){
-    for (int i = 0; IsNotCombatArtListTerminator(i); i++){
+    for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
         if (CombatArtList[i].battleProcFunction == NULL) continue;
 
         CombatArtList[i].battleProcFunction(BattleActor, BattleTarget, bhIterator, bs);
@@ -30,7 +30,7 @@ void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct Batt
 int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord){
     int modifiedRangeWord = rangeWord; // we LOVE item range fix in this house
     
-    for (int i = 0; IsNotCombatArtListTerminator(i); i++){
+    for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
         if (CombatArtList[i].rangeFunction == NULL) continue;
 
         modifiedRangeWord = CombatArtList[i].rangeFunction(unit, itemID, modifiedRangeWord);
@@ -55,7 +55,7 @@ void BuildActiveUnitsArtsList(void){
     u16 j = 0;
 
     for (i = 0; ; i++){
-        if (IsCombatArtListTerminator(i)){
+        if (CombatArtList[i].nameTextID == 0xFFFF){
             gActiveUnitUsableArts[j] = 0xFFFF;
             return;
         }

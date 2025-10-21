@@ -6,7 +6,7 @@ u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number){
 
     u8 anyArtsUsable = FALSE;
 
-    for (int i = 0; IsNotCombatArtListTerminator(i); i++){
+    for (int i = 0; (int)CombatArtList[i].usability != (-1); i++){
 
         if (CombatArtList[i].usability == NULL) continue;
 
@@ -28,7 +28,7 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
         
         // "iterate through" gActiveUnitUsableArts
 
-        if (gActiveUnitUsableArts[i] == 0xFFFF || i == NumberOfArtsInMenuAtOnce || IsCombatArtListTerminator(gActiveUnitUsableArts[i])){
+        if (gActiveUnitUsableArts[i] == 0xFFFF || i == NumberOfArtsInMenuAtOnce || CombatArtList[gActiveUnitUsableArts[i]].nameTextID == 0xFFFF){
             // write the terminator
             MemCpy(&(struct MenuItemDef)MenuItemsEnd, (struct MenuItemDef*)(CAMenuDef.menuItems + i), sizeof(struct MenuItemDef));
             break;
