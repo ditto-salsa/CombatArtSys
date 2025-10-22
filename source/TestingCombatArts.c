@@ -1,7 +1,12 @@
 #include "CombatArts.h"
 
+// bool
 u8 BigAtkArtUsability(){
     return CombatArtGeneralAttackingUsability();
+}
+
+u8 BigAtkArtMenuUsability(const struct MenuItemDef* def, int number){
+    return CombatArtGeneralAttackingUsability() ? MENU_ENABLED : MENU_NOTSHOWN;
 }
 
 u8 BigAtkArtEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){

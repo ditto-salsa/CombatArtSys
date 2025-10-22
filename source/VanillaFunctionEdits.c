@@ -1,47 +1,113 @@
-#include "../_include/gbafe.h"
+#include "CombatArts.h"
 
-void RedrawMenu(struct MenuProc* proc)
+void ProcessMenuDpadInput(struct MenuProc* proc)
 {
     int i;
 
-    if (proc->state & MENU_STATE_NOTSHOWN)
-        return;
+    proc->itemPrevious = proc->itemCurrent;
 
-    DrawUiFrame(
-        BG_GetMapBuffer(proc->backBg),
-        proc->rect.x, proc->rect.y, proc->rect.w, proc->rect.h,
-        proc->tileref, proc->def->style);
+    // Handle Up keyin
 
-    ClearUiFrame(
-        BG_GetMapBuffer(proc->frontBg),
-        proc->rect.x, proc->rect.y, proc->rect.w, proc->rect.h);
-
-    for (i = 0; i < proc->itemCount; ++i)
+    if (gKeyStatusPtr->repeatedKeys & DPAD_UP)
     {
-        struct MenuItemProc* item = proc->menuItems[i];
-
-        if (item->def->onDraw)
+        if (proc->itemCurrent == 0)
         {
-            item->def->onDraw(proc, item);
-            continue;
+
+                // Despite my best efforts (which there were zero attempts using) I require implementing this specifically for combat arts,
+                // which means you will need your own implementation for your own scrolling menu to track each option. Sorry.
+
+            if (proc->def == &CAMenuDef){
+                if (proc->itemCount >= NumberOfArtsInMenuAtOnce &&
+                (int)(proc->menuItems[proc->itemCurrent]->def->name) != gActiveUnitUsableArts[0]){
+
+                    // shift menu defs down by one
+                    for (i = NumberOfArtsInMenuAtOnce - 1; i > 0; i--){
+                        MemCpy((struct MenuItemDef*)(CAMenuDef.menuItems + (i - 1)),(struct MenuItemDef*)(CAMenuDef.menuItems + i), sizeof(struct MenuItemDef));
+                    }
+
+                    gFirstMenuItemActiveArtID--; gLastMenuItemActiveArtID--;
+
+                    BuildCombatArtsMenuItemDef(gFirstMenuItemActiveArtID,(struct MenuItemDef*)(CAMenuDef.menuItems));
+
+                    for (i = 0; i < NumberOfArtsInMenuAtOnce; i++){
+                        ClearText(&(proc->menuItems[i]->text));
+                    }
+
+                    RedrawMenu(proc);
+                }
+
+            } else {
+
+                if (gKeyStatusPtr->repeatedKeys != gKeyStatusPtr->newKeys)
+                    return;
+
+                proc->itemCurrent = proc->itemCount - 1;
+            }
+
+        } else {
+            proc->itemCurrent--;
         }
+    } 
 
-        if (item->def->color)
-            Text_SetColor(&item->text, item->def->color);
+    // Handle down keyin
 
-        if (item->availability == MENU_DISABLED)
-            Text_SetColor(&item->text, TEXT_COLOR_SYSTEM_GRAY);
+    if (gKeyStatusPtr->repeatedKeys & DPAD_DOWN)
+    {
+        if (proc->itemCurrent == (proc->itemCount - 1))
+        {
 
-        if (!item->def->nameMsgId)
-            Text_DrawString(&item->text, item->def->name);
-        else
-            Text_DrawString(&item->text, GetStringFromIndex(item->def->nameMsgId));
+            if (proc->def == &CAMenuDef){
+                if (proc->itemCount >= NumberOfArtsInMenuAtOnce &&
+                (int)(proc->menuItems[proc->itemCurrent]->def->name) != gActiveUnitUsableArts[NumberOfUsableArtsAtOnce] &&
+                gActiveUnitUsableArts[gLastMenuItemActiveArtID + 1] != 0xFFFF){
 
-        PutText(
-            &item->text,
-            TILEMAP_LOCATED(BG_GetMapBuffer(proc->frontBg), item->xTile, item->yTile));
+                    // shift menu defs up by one
+                    for (i = 0; i < NumberOfArtsInMenuAtOnce - 1; i++){
+                        MemCpy((struct MenuItemDef*)(CAMenuDef.menuItems + (i + 1)),(struct MenuItemDef*)(CAMenuDef.menuItems + i), sizeof(struct MenuItemDef));
+                    }
+
+                    gFirstMenuItemActiveArtID++; gLastMenuItemActiveArtID++;
+
+                    BuildCombatArtsMenuItemDef(gLastMenuItemActiveArtID,(struct MenuItemDef*)(CAMenuDef.menuItems + (NumberOfArtsInMenuAtOnce - 1)));
+
+                    for (i = 0; i < NumberOfArtsInMenuAtOnce; i++){
+                        ClearText(&(proc->menuItems[i]->text));
+                    }
+
+                    RedrawMenu(proc);
+                }
+            
+            } else {
+
+                if (gKeyStatusPtr->repeatedKeys != gKeyStatusPtr->newKeys)
+                    return;
+
+                proc->itemCurrent = 0;
+            }
+
+        } else {
+            proc->itemCurrent++;
+        }
     }
 
-    DrawMenuItemHover(proc, proc->itemCurrent, TRUE);
-    SyncMenuBgs(proc);
+    // Update hover display
+
+    if (proc->itemPrevious != proc->itemCurrent)
+    {
+        DrawMenuItemHover(proc, proc->itemPrevious, FALSE);
+        DrawMenuItemHover(proc, proc->itemCurrent, TRUE);
+
+        PlaySoundEffect(SONG_SE_SYS_CURSOR_UD1);
+    }
+
+    // Call def's switch in/out funcs
+
+    if (HasMenuChangedItem(proc))
+    {
+        if (proc->menuItems[proc->itemPrevious]->def->onSwitchOut)
+            proc->menuItems[proc->itemPrevious]->def->onSwitchOut(proc, proc->menuItems[proc->itemPrevious]);
+
+        if (proc->menuItems[proc->itemCurrent]->def->onSwitchIn)
+            proc->menuItems[proc->itemCurrent]->def->onSwitchIn(proc, proc->menuItems[proc->itemCurrent]);
+    }
 }

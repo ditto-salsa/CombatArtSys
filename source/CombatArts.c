@@ -39,6 +39,7 @@ int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord){
     return modifiedRangeWord;
 }
 
+// bool
 u8 ArtTester(struct Unit* unit, u16 artID){
     return CombatArtList[artID].usability(unit);
 }

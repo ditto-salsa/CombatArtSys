@@ -41,8 +41,14 @@ WORD CAS_NumberOfArtsInMenuAtOnce
 NumberOfUsableArtsAtOnce:
 WORD CAS_NumberOfUsableArtsAtOnce
 
-//#include "source/VanillaFunctionEdits.lyn.event"
+#include "source/VanillaFunctionEdits.lyn.event"
 #include "source/CombatArts.lyn.event"
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"
+
+// RedrawMenu edit: `name` field of MenuItemDef is no longer used, ever
+PUSH
+ORG 0x4F05A
+SHORT 0xE007
+POP

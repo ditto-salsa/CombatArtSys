@@ -189,7 +189,7 @@ extern void * gBGVramTilemapPointers[4];
 
 extern void (*gMainCallback)(void);
 
-extern struct KeyStatusBuffer * CONST_DATA gKeyStatusPtr;
+extern struct KeyStatusBuffer * gKeyStatusPtr;
 
 extern struct LCDControlBuffer gLCDControlBuffer;
 

@@ -2,17 +2,15 @@
 
 // Contains "helper" functions to be used in user code for combat arts
 
-extern const u8 CombatArtDurabilityList[];
-
 u8 CombatArtGeneralAttackingUsability() {
     
     // AttackCommandUsability but modified
     if (gActiveUnit->state & US_HAS_MOVED) {
-        return MENU_NOTSHOWN;
+        return FALSE;
     }
 
     if (gActiveUnit->state & US_IN_BALLISTA) {
-        return MENU_NOTSHOWN;
+        return FALSE;
     }
 
     for (int i = 0; i < UNIT_ITEM_COUNT; i++) {
@@ -37,10 +35,10 @@ u8 CombatArtGeneralAttackingUsability() {
             continue;
         }
 
-        return MENU_ENABLED;
+        return TRUE;
     }
 
-    return MENU_NOTSHOWN;
+    return FALSE;
 }
 
 

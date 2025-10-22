@@ -23,6 +23,8 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
 
     BuildActiveUnitsArtsList();
 
+    gFirstMenuItemActiveArtID = 0;
+
     // Filling up the initial menu items in RAM
     for (u16 i = 0; ; i++) {
         
@@ -31,16 +33,18 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
         if (gActiveUnitUsableArts[i] == 0xFFFF || i == NumberOfArtsInMenuAtOnce || CombatArtList[gActiveUnitUsableArts[i]].nameTextID == 0xFFFF){
             // write the terminator
             MemCpy(&(struct MenuItemDef)MenuItemsEnd, (struct MenuItemDef*)(CAMenuDef.menuItems + i), sizeof(struct MenuItemDef));
+
+            gLastMenuItemActiveArtID = i - 1;
             break;
         }
 
         BuildCombatArtsMenuItemDef(i, (struct MenuItemDef*)(CAMenuDef.menuItems + i));
     }
 
-    if (CAMenuDef.menuItems->nameMsgId){ // Checking that there is at least one menu item present
+    if (CAMenuDef.menuItems[0].nameMsgId){ // Checking that there is at least one menu item present
 
         // Finally actually make the menu and pray everything works as intended
-        StartOrphanMenu(&CAMenuDef);
+        StartSemiCenteredOrphanMenu(&CAMenuDef, gBmSt.cursorTarget.x - gBmSt.camera.x, 1, 22);
     }
 
     return MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A | MENU_ACT_CLEAR | MENU_ACT_ENDFACE;

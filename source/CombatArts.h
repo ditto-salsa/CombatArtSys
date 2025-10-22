@@ -16,8 +16,8 @@ struct CombatArt {
     /* 20 */ int (*rangeFunction)(struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
 };
 
-extern struct CombatArt CombatArtList[];
-extern u8 CombatArtDurabilityList[];
+extern const struct CombatArt CombatArtList[];
+extern const u8 CombatArtDurabilityList[];
 
 extern const struct MenuDef CAMenuDef;
 extern const int NumberOfArtsInMenuAtOnce;
@@ -27,15 +27,18 @@ extern const int NumberOfUsableArtsAtOnce;
 // RAM start is located at CAMenuDef.menuItems because it draws the options from RAM
 #define ActiveUnitUsableArts_ADDRESS ((int)(CAMenuDef.menuItems) + ((NumberOfArtsInMenuAtOnce + 1) * sizeof(struct MenuItemDef)))
 #define gActiveUnitUsableArts ((u16*)(ActiveUnitUsableArts_ADDRESS))
-#define ActiveArtID_ADDRESS (ActiveUnitUsableArts_ADDRESS + ((NumberOfUsableArtsAtOnce + 1) * sizeof(u16))
-#define gActiveArtID (*((u8*)ActiveArtID_ADDRESS))
+#define ActiveArtID_ADDRESS (ActiveUnitUsableArts_ADDRESS + ((NumberOfUsableArtsAtOnce + 1) * sizeof(u16)))
+#define gActiveArtID (*(u16*)(ActiveArtID_ADDRESS))
+#define FirstMenuItemActiveArtID_ADDRESS (ActiveArtID_ADDRESS + sizeof(u16))
+#define gFirstMenuItemActiveArtID (*(u16*)(FirstMenuItemActiveArtID_ADDRESS))
+#define LastMenuItemActiveArtID_ADDRESS (FirstMenuItemActiveArtID_ADDRESS + sizeof(u16))
+#define gLastMenuItemActiveArtID (*(u16*)(LastMenuItemActiveArtID_ADDRESS))
 
 // CombatArts.c functions
 void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget);
 void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, struct ActionData* ad);
 void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs);
 int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord);
-
 u8 ArtTester(struct Unit* unit, u16 artID);
 void BuildActiveUnitsArtsList(void);
 
