@@ -49,6 +49,6 @@ WORD CAS_NumberOfUsableArtsAtOnce
 
 // RedrawMenu edit: `name` field of MenuItemDef is no longer used, ever
 PUSH
-ORG 0x4F05A
-SHORT 0xE007
+ORG 0x4F05C
+SHORT 0xE006
 POP
