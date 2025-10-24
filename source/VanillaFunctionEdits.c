@@ -34,6 +34,14 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
                     }
 
                     RedrawMenu(proc);
+
+                    proc->unk68 = FALSE;
+
+                } else {
+                    if (!proc->unk68){
+                        PlaySoundEffect(0x6C);
+                        proc->unk68 = TRUE;
+                    }
                 }
 
             } else {
@@ -46,6 +54,8 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
 
         } else {
             proc->itemCurrent--;
+
+            proc->unk68 = FALSE;
         }
     } 
 
@@ -75,6 +85,14 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
                     }
 
                     RedrawMenu(proc);
+
+                    proc->unk68 = FALSE;
+
+                } else {
+                    if (!proc->unk68){
+                        PlaySoundEffect(0x6C);
+                        proc->unk68 = TRUE;
+                    }
                 }
             
             } else {
@@ -87,6 +105,8 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
 
         } else {
             proc->itemCurrent++;
+
+            proc->unk68 = FALSE;
         }
     }
 
