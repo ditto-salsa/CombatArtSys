@@ -35,12 +35,29 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
 
                     RedrawMenu(proc);
 
-                    proc->unk68 = FALSE;
+                    DrawMenuItemHover(proc, 1, FALSE);
+                    DrawMenuItemHover(proc, 0, TRUE);
+
+                    PlaySoundEffect(SONG_SE_SYS_CURSOR_UD1);
+
+                    if (proc->menuItems[1]->def->onSwitchOut){
+                        proc->menuItems[1]->def->onSwitchOut(proc, proc->menuItems[1]);
+                    }
+
+                    if (proc->menuItems[0]->def->onSwitchIn){
+                        proc->menuItems[0]->def->onSwitchIn(proc, proc->menuItems[0]);
+                    }
+
+                    if (proc->proc_idleCb == (ProcFunc)0x0804F4A1){ // Menu_AutoHelpBox_OnLoop
+                        proc->def->onHelpBox(proc, proc->menuItems[0]);
+                    }
+
+                    proc->unk68 = 0;
 
                 } else {
                     if (!proc->unk68){
                         PlaySoundEffect(0x6C);
-                        proc->unk68 = TRUE;
+                        proc->unk68 = 1;
                     }
                 }
 
@@ -55,7 +72,7 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
         } else {
             proc->itemCurrent--;
 
-            proc->unk68 = FALSE;
+            proc->unk68 = 0;
         }
     } 
 
@@ -86,12 +103,29 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
 
                     RedrawMenu(proc);
 
-                    proc->unk68 = FALSE;
+                    DrawMenuItemHover(proc, NumberOfArtsInMenuAtOnce - 2, FALSE);
+                    DrawMenuItemHover(proc, NumberOfArtsInMenuAtOnce - 1, TRUE);
+
+                    PlaySoundEffect(SONG_SE_SYS_CURSOR_UD1);
+
+                    if (proc->menuItems[NumberOfArtsInMenuAtOnce - 2]->def->onSwitchOut){
+                        proc->menuItems[NumberOfArtsInMenuAtOnce - 2]->def->onSwitchOut(proc, proc->menuItems[NumberOfArtsInMenuAtOnce - 2]);
+                    }
+
+                    if (proc->menuItems[NumberOfArtsInMenuAtOnce - 1]->def->onSwitchIn){
+                        proc->menuItems[NumberOfArtsInMenuAtOnce - 1]->def->onSwitchIn(proc, proc->menuItems[NumberOfArtsInMenuAtOnce - 1]);
+                    }
+
+                    if (proc->proc_idleCb == (ProcFunc)0x0804F4A1){ // Menu_AutoHelpBox_OnLoop
+                        proc->def->onHelpBox(proc, proc->menuItems[NumberOfArtsInMenuAtOnce - 1]);
+                    }
+
+                    proc->unk68 = 0;
 
                 } else {
                     if (!proc->unk68){
                         PlaySoundEffect(0x6C);
-                        proc->unk68 = TRUE;
+                        proc->unk68 = 1;
                     }
                 }
             
@@ -106,7 +140,7 @@ void ProcessMenuDpadInput(struct MenuProc* proc)
         } else {
             proc->itemCurrent++;
 
-            proc->unk68 = FALSE;
+            proc->unk68 = 0;
         }
     }
 
