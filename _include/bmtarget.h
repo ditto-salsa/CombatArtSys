@@ -3,7 +3,7 @@
 
 // ??? ForEachUnitInMovement(???);
 void ForEachUnitInRange(void(* func)(struct Unit * unit));
-void ForEachPosInRange(void(* func)(int x, int y));
+// ??? ForEachPosInRange(???);
 // ??? ForEachAdjacentUnit(???);
 // ??? ForEachAdjacentPosition(???);
 // ??? sub_8024FD8(???);
@@ -72,7 +72,7 @@ void MakeTargetListForLatona(struct Unit* unit);
 void sub_8026414(int unk);
 // ??? TryAddToMineTargetList(???);
 void MakeTargetListForMine(struct Unit* unit);
-void TryAddToLightRuneTargetList(int x, int y);
+// ??? TryAddToLightRuneTargetList(???);
 void MakeTargetListForLightRune(struct Unit* unit);
 // ??? TryAddUnitToDanceRingTargetList(???);
 void MakeTargetListForDanceRing(struct Unit* unit);

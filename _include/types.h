@@ -1,16 +1,9 @@
 #ifndef GUARD_TYPES_H
 #define GUARD_TYPES_H
 
+#include "prelude.h"
 #include "gba/types.h"
 #include <limits.h>
-
-#ifndef __STDBOOL_H__
-//typedef s8 bool;
-//enum { false, true };
-#define false	false
-#define true	true
-#define __bool_true_false_are_defined	1
-#endif /* bool */
 
 // Forward declarations for common types
 struct Proc;

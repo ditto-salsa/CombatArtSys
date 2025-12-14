@@ -4,39 +4,19 @@
 
 // Function iterators to be put into calc loops
 void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget){
-    for (int i = 0; (int)CombatArtList[i].preBattleFunction != (-1); i++){
-        if (CombatArtList[i].preBattleFunction == NULL) continue;
-
-        CombatArtList[i].preBattleFunction(BattleActor, BattleTarget);
-    }
+    if (CombatArtList[gActiveArtID].preBattleFunction != NULL) CombatArtList[gActiveArtID].preBattleFunction(BattleActor, BattleTarget);
 }
 
 void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, struct ActionData* ad){
-    for (int i = 0; (int)CombatArtList[i].postBattleFunction != (-1); i++){
-        if (CombatArtList[i].postBattleFunction == NULL) continue;
-
-        CombatArtList[i].postBattleFunction(actor, target, ad);
-    }
+    if (CombatArtList[gActiveArtID].postBattleFunction != NULL) CombatArtList[gActiveArtID].postBattleFunction(actor, target, ad);
 }
 
-void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs){
-    for (int i = 0; (int)CombatArtList[i].battleProcFunction != (-1); i++){
-        if (CombatArtList[i].battleProcFunction == NULL) continue;
-
-        CombatArtList[i].battleProcFunction(BattleActor, BattleTarget, bhIterator, bs);
-    }
+void CombatArtBattleProcFuncWrapper(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs){
+    if (CombatArtList[gActiveArtID].postBattleFunction != NULL) CombatArtList[gActiveArtID].battleProcFunction(BattleActor, BattleTarget, bhIterator, bs);
 }
 
 int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord){
-    int modifiedRangeWord = rangeWord; // we LOVE item range fix in this house
-    
-    for (int i = 0; (int)CombatArtList[i].rangeFunction != (-1); i++){
-        if (CombatArtList[i].rangeFunction == NULL) continue;
-
-        modifiedRangeWord = CombatArtList[i].rangeFunction(unit, itemID, modifiedRangeWord);
-    }
-
-    return modifiedRangeWord;
+    return CombatArtList[gActiveArtID].rangeFunction == NULL ? rangeWord : CombatArtList[gActiveArtID].rangeFunction(unit, itemID, rangeWord);
 }
 
 // bool

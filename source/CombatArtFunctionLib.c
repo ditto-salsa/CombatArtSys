@@ -2,6 +2,10 @@
 
 // Contains "helper" functions to be used in user code for combat arts
 
+void SetActiveArt(u16 artID){
+    gActiveArtID = artID;
+}
+
 u8 CombatArtGeneralAttackingUsability() {
     
     // AttackCommandUsability but modified
@@ -28,7 +32,7 @@ u8 CombatArtGeneralAttackingUsability() {
             continue;
         }
         // Durability cost check for art
-        //if (CombatArtDurabilityList[gCurrentArtID] > ITEM_USES(item)){}
+        //if (CombatArtDurabilityList[gActiveArtID] > ITEM_USES(item)){}
 
         MakeTargetListForWeapon(gActiveUnit, item);
         if (GetSelectTargetCount() == 0) {

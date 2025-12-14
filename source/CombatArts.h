@@ -46,6 +46,18 @@ void BuildActiveUnitsArtsList(void);
 u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number);
 u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem);
 void BuildCombatArtsMenuItemDef(u8 usableArtIndex, struct MenuItemDef* loc);
+struct MenuProc* StartScrollableMenuCore(
+    const struct MenuDef* def,
+    struct MenuRect rect,
+    int backBg,
+    int tileref,
+    int frontBg,
+    int unk,
+    ProcPtr parent);
+void CAMenu_Menu_OnIdle(struct MenuProc* proc);
+u8 CAMenu_MenuAutoHelpBoxSelect(struct MenuProc* menu);
+void CAMenu_Menu_AutoHelpBox_OnLoop(struct MenuProc* proc);
+void CAMenu_ProcessMenuDpadInput(struct MenuProc* proc);
 
 // CombatArtFunctionLib.c functions
 #include "CombatArtFunctionLib.h"
