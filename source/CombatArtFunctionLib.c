@@ -2,10 +2,6 @@
 
 // Contains "helper" functions to be used in user code for combat arts
 
-void SetActiveArt(u16 artID){
-    gActiveArtID = artID;
-}
-
 u8 CombatArtGeneralAttackingUsability() {
     
     // AttackCommandUsability but modified

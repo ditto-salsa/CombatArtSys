@@ -3,17 +3,22 @@
 
 #include "../_include/gbafe.h"
 
+enum {
+    False,
+    True
+};
+
 struct CombatArt {
-    /* 00 */ u16 nameTextID;
-    /* 02 */ u16 descTextID;
-    /* 04 */ u8 (*usability)(struct Unit* unit);
-    /* 08 */ u8 (*menuUsability)(const struct MenuItemDef*, int number);
-    /* 0C */ int(*menuDraw)(struct MenuProc* menu, struct MenuItemProc* menuItem);
-    /* 10 */ u8 (*menuEffect)(struct MenuProc* menu, struct MenuItemProc* menuItem);
-    /* 14 */ void (*preBattleFunction)(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget);
-    /* 18 */ void (*postBattleFunction)(struct Unit* actor, struct Unit* target, struct ActionData* ad);
-    /* 1C */ void (*battleProcFunction)(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs);
-    /* 20 */ int (*rangeFunction)(struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
+    /* 00 */ u16  nameTextID;
+    /* 02 */ u16  descTextID;
+    /* 04 */ u8   (*usability)(struct Unit* unit, u16 artID);
+    /* 08 */ u8   (*menuUsability)(const struct MenuItemDef*, int number);
+    /* 0C */ int  (*menuDraw)(struct MenuProc* menu, struct MenuItemProc* menuItem);
+    /* 10 */ u8   (*menuEffect)(struct MenuProc* menu, struct MenuItemProc* menuItem);
+    /* 14 */ void (*preBattleFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target);
+    /* 18 */ void (*postBattleFunction)(u16 artID, struct Unit* actor, struct Unit* target, struct ActionData* actionData);
+    /* 1C */ void (*battleProcFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target, struct BattleHit* hitIterator, struct BattleStats* stats);
+    /* 20 */ int  (*rangeFunction)(u16 artID, struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
 };
 
 extern const struct CombatArt CombatArtList[];
@@ -22,19 +27,22 @@ extern const u8 CombatArtDurabilityList[];
 extern const struct MenuDef CAMenuDef;
 extern const int NumberOfArtsInMenuAtOnce;
 extern const int NumberOfUsableArtsAtOnce;
+extern const int NumberOfActiveArtsAtOnce;
 
 // RAM Locations
 // RAM start is located at CAMenuDef.menuItems because it draws the options from RAM
-#define UsableArts_ADDRESS ((int)(CAMenuDef.menuItems) + ((NumberOfArtsInMenuAtOnce + 1) * sizeof(struct MenuItemDef)))
-#define gUsableArts ((u16*)(UsableArts_ADDRESS))
-#define ActiveArtID_ADDRESS (UsableArts_ADDRESS + ((NumberOfUsableArtsAtOnce + 1) * sizeof(u16)))
-#define gActiveArtID (*(u16*)(ActiveArtID_ADDRESS))
-#define Menu_FirstUsableArtID_ADDRESS (ActiveArtID_ADDRESS + sizeof(u16))
-#define gMenu_FirstUsableArtID (*(u16*)(Menu_FirstUsableArtID_ADDRESS))
-#define Menu_LastUsableArtID_ADDRESS (Menu_FirstUsableArtID_ADDRESS + sizeof(u16))
-#define gMenu_LastUsableArtID (*(u16*)(Menu_LastUsableArtID_ADDRESS))
+#define UsableArts_ADDRESS ( (int)(CAMenuDef.menuItems) + ((NumberOfArtsInMenuAtOnce + 1) * sizeof(struct MenuItemDef)) )
+#define gUsableArts ( (u16*)(UsableArts_ADDRESS) )
+#define ActiveArts_ADDRESS ( UsableArts_ADDRESS + ((NumberOfUsableArtsAtOnce + 1) * sizeof(u16)) )
+#define gActiveArts ( (u16*)(ActiveArts_ADDRESS) )
+#define Menu_FirstUsableArtID_ADDRESS ( ActiveArts_ADDRESS + ((NumberOfActiveArtsAtOnce + 1) * sizeof(u16)) )
+#define gMenu_FirstUsableArtID ( *(u16*)(Menu_FirstUsableArtID_ADDRESS) )
+#define Menu_LastUsableArtID_ADDRESS ( Menu_FirstUsableArtID_ADDRESS + sizeof(u16) )
+#define gMenu_LastUsableArtID ( *(u16*)(Menu_LastUsableArtID_ADDRESS) )
 
 // CombatArts.c functions
+u16 GetActiveArt(struct Unit* unit);
+void SetActiveArt(struct Unit* unit, u16 artID);
 void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget);
 void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, struct ActionData* ad);
 void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs);

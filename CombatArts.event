@@ -32,11 +32,11 @@ CombatArt(0, \
 		  BigAtkArtMenuUsability, \
 		  0, \
 		  BigAtkArtEffect, \
-		  0, \
+		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  0)
-		  
+	
 CombatArt(1, \
 		  0x213, \
 		  0x213, \
@@ -136,7 +136,7 @@ CombatArt(8, \
 		  BigAtkArtMenuUsability, \
 		  0, \
 		  BigAtkArtEffect, \
-		  0, \
+		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  0)

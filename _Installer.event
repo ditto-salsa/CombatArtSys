@@ -51,8 +51,8 @@ POIN 0x176E9
 
 ALIGN 4
 
-#if CAS_NumberOfArtsInMenuAtOnce > 9
-	ERROR "The upper limit for the number of arts in the menu at once is 9, because I don't want someone changing the number above this and whining at me."
+#if CAS_NumberOfArtsInMenuAtOnce > 11
+	ERROR "The upper limit for the number of arts in the menu at once is 11 because that's how fegba menus work okay?"
 #endif
 
 NumberOfArtsInMenuAtOnce:
@@ -60,6 +60,9 @@ WORD CAS_NumberOfArtsInMenuAtOnce
 
 NumberOfUsableArtsAtOnce:
 WORD CAS_NumberOfUsableArtsAtOnce
+
+NumberOfActiveArtsAtOnce:
+WORD CAS_NumberOfActiveArtsAtOnce
 
 #include "source/CombatArts.lyn.event"
 #include "source/CombatArtsMenus.lyn.event"

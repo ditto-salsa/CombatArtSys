@@ -24,7 +24,9 @@
 // RAM usage is calculated based on these constants; please make sure you don't exceed freespace if changing these
 // Starting RAM address for the large block of used RAM
 #define CAS_RAM_START 0x02026E30 // size of freespace is 0x2028
-// Number of Arts shown in the menu at once without scrolling, maximum is 9
+// Number of Arts shown in the menu at once without scrolling, maximum is 11
 #define CAS_NumberOfArtsInMenuAtOnce 7
-// Number of Arts that can be simultaneously active
+// Number of Arts that can be simultaneously usable by a unit
 #define CAS_NumberOfUsableArtsAtOnce 20
+// Range of unit indexes that are able to have active arts. This will kill me.
+#define CAS_NumberOfActiveArtsAtOnce 0xC0
