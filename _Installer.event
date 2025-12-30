@@ -14,6 +14,26 @@
 // Item Range Fix
 #include "ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.
 
+ThumbFunc(MovGetter) // put a different mov getter instead of this if you so desire, there just needs to be one that exists to satiate IRF (this replicates vanilla behaviour)
+SHORT 0xB501 // push {r0, r14}
+SHORT 0x4907 // ldr r1, GetUnitEquippedWeapon
+SHORT 0x468E // mov r14, r1
+SHORT 0xF800 // .short 0xF800
+SHORT 0x4906 // ldr r1, GetItemStatBonuses
+SHORT 0x468E // mov r14, r1
+SHORT 0xF800 // .short 0xF800
+SHORT 0x79C0 // ldrb r0, [r0, #0x7]
+SHORT 0xBC04 // pop {r2}
+SHORT 0x7F51 // ldrb r1, [r2, #0x1D]
+SHORT 0x1840 // add r0, r0, r1
+SHORT 0x6851 // ldr r1, [r2, #0x4]
+SHORT 0x7C89 // ldrb r1, [r1, #0x12]
+SHORT 0x1840 // add r0, r0, r1
+SHORT 0xBC02 // pop {r1}
+SHORT 0x4708 // bx r1
+POIN 0x16B29
+POIN 0x176E9
+
 // Calc Loops
 #include "CalcLoops/PrebattleCalcLoop.event"
 #include "CalcLoops/PostbattleCalcLoop.event"
@@ -41,7 +61,6 @@ WORD CAS_NumberOfArtsInMenuAtOnce
 NumberOfUsableArtsAtOnce:
 WORD CAS_NumberOfUsableArtsAtOnce
 
-#include "source/VanillaFunctionEdits.lyn.event"
 #include "source/CombatArts.lyn.event"
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"

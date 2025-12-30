@@ -1,5 +1,5 @@
 ALIGN 4; BattleProcFunctions: // Make sure to set THUMB bit if running THUMB code!
-POIN CombatArtBattleProcFuncIterator
+POIN CombatArtBattleProcFuncWrapper
 WORD 0 // Terminator
 
 

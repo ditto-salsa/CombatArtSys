@@ -1,5 +1,5 @@
 ALIGN 4; PostBattleFunctions: // Make sure to set THUMB bit if running THUMB code!
-POIN CombatArtPostbattleFuncIterator
+POIN CombatArtPostbattleFuncWrapper
 WORD 0 // Terminator
 
 

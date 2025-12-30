@@ -1,6 +1,6 @@
 ALIGN 4; PreBattleFunctions: // Make sure to set THUMB bit if running THUMB code!
 POIN 0x2AC61 0x2AC91 0x2ACF9 0x2ADCD // Vanilla functions
-POIN CombatArtPrebattleFuncIterator
+POIN CombatArtPrebattleFuncWrapper
 WORD 0 // Terminator
 
 

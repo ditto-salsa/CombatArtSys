@@ -35,17 +35,17 @@
 	ALIGN 4
 	StaffAI_TargetUnits:
 	#include "StaffAI_TargetUnits.lyn.event"
-	POIN 0x19224|1 GetItemRange|1 //FillRange|1 StaffAI_ItemRange
+	POIN MovGetter GetItemRange|1 //FillRange|1 StaffAI_ItemRange
 	
 	ALIGN 4
 	StaffAI_TargetTiles:
 	#include "StaffAI_TargetTiles.lyn.event"
-	POIN 0x19224|1 GetItemRange|1 //FillRange|1 StaffAI_ItemRange
+	POIN MovGetter GetItemRange|1 //FillRange|1 StaffAI_ItemRange
 	
 	ALIGN 4
 	StaffAI_TargetAreas:
 	#include "StaffAI_TargetAreas.lyn.event"
-	POIN 0x19224|1 GetItemRange|1
+	POIN MovGetter GetItemRange|1
 	
 	ALIGN 4
 	GetUnitHPPercent:

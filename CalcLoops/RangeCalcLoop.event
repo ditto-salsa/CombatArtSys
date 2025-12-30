@@ -1,5 +1,5 @@
 ALIGN 4; RangeFunctions: // Make sure to set THUMB bit if running THUMB code!
-POIN CombatArtRangeFuncIterator
+POIN CombatArtRangeFuncWrapper
 WORD 0 // Terminator
 
 
