@@ -41,14 +41,16 @@ extern const int NumberOfActiveArtsAtOnce;
 #define gMenu_LastUsableArtID ( *(u16*)(Menu_LastUsableArtID_ADDRESS) )
 
 // CombatArts.c functions
+u8 ArtTester(struct Unit* unit, u16 artID);
 u16 GetActiveArt(struct Unit* unit);
 void SetActiveArt(struct Unit* unit, u16 artID);
 void CombatArtPrebattleFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget);
 void CombatArtPostbattleFuncIterator(struct Unit* actor, struct Unit* target, struct ActionData* ad);
 void CombatArtBattleProcFuncIterator(struct BattleUnit* BattleActor, struct BattleUnit* BattleTarget, struct BattleHit* bhIterator, struct BattleStats* bs);
 int CombatArtRangeFuncIterator(struct Unit* unit, int itemID, int rangeWord);
-u8 ArtTester(struct Unit* unit, u16 artID);
 void BuildUsableArtsList(void);
+void CAS_EMS_WriteActiveArts(void* target, u32 size);
+void CAS_EMS_ReadActiveArts(void* target, u32 size);
 
 // CombatArtMenus.c functions
 u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number);
