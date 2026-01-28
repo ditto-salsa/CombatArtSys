@@ -11,12 +11,7 @@ u8 BigAtkArtMenuUsability(const struct MenuItemDef* def, int number){
 
 u8 BigAtkArtEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){
 
-    u16 beef = 0xBEEF;
-    for (int i = 0; i < NumberOfActiveArtsAtOnce; i++){
-        MemCpy(&beef, &gActiveArts[i], sizeof(u16));
-    }
-
-    SetActiveArt(gActiveUnit, ART_ID_FROM_MENUITEM(menuItem));
+    SetActiveArt(gActiveUnit, ART_ID_FROM_MENUDEF(menuItem->def));
 
     ResetIconGraphics();
     LoadIconPalettes(4);

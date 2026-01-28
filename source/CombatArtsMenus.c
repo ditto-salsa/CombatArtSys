@@ -4,19 +4,16 @@
 
 u8 UM_CombatArtsMenuUsability(const struct MenuItemDef* def, int number){
 
-    u8 anyArtsUsable = FALSE;
-
     for (int i = 0; (int)CombatArtList[i].usability != (-1); i++){
 
         if (CombatArtList[i].usability == NULL) continue;
 
         if (ArtTester(gActiveUnit, i)){
-            anyArtsUsable = TRUE;
-            break;
+            return MENU_ENABLED;
         }
     }
-
-    return anyArtsUsable ? MENU_ENABLED : MENU_NOTSHOWN;
+    
+    return MENU_NOTSHOWN;
 }
 
 u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){

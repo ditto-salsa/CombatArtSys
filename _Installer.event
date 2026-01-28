@@ -11,6 +11,8 @@
 // Text
 #include "Text.event" // Adds the necessary text for menus, IDs can be changed here. - Contains the Anti-Huffman engine hack
 
+// EMS - to save gActiveArts array on suspend
+
 // Item Range Fix
 #include "ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.
 
@@ -61,10 +63,6 @@ WORD CAS_NumberOfArtsInMenuAtOnce
 NumberOfUsableArtsAtOnce:
 WORD CAS_NumberOfUsableArtsAtOnce
 
-NumberOfActiveArtsAtOnce:
-WORD CAS_NumberOfActiveArtsAtOnce
-
-#include "source/CombatArts.lyn.event"
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"

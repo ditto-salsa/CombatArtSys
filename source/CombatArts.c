@@ -28,7 +28,7 @@ void CombatArtPrebattleFuncWrapper(struct BattleUnit* actor, struct BattleUnit* 
 void CombatArtPostbattleFuncWrapper(struct Unit* actor, struct Unit* target, struct ActionData* actionData){
     if (GetActiveArt(actor) == 0xFFFF) return;
 
-    if (CombatArtList[GetActiveArt(actor)].postBattleFunction != NULL) 
+    if (CombatArtList[GetActiveArt(actor)].postBattleFunction != NULL)
         CombatArtList[GetActiveArt(actor)].postBattleFunction(GetActiveArt(actor), actor, target, actionData);
 }
 
@@ -73,3 +73,10 @@ void BuildUsableArtsList(void){
     }
 }
 
+void CAS_EMS_WriteActiveArts(void* target, u32 size){
+    WriteAndVerifySramFast((void*)gActiveArts, target, size);
+}
+
+void CAS_EMS_ReadActiveArts(void* target, u32 size){
+    ReadSramFast(target, (void*)gActiveArts, size);
+}
