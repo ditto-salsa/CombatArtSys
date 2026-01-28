@@ -63,6 +63,10 @@ WORD CAS_NumberOfArtsInMenuAtOnce
 NumberOfUsableArtsAtOnce:
 WORD CAS_NumberOfUsableArtsAtOnce
 
+NumberOfActiveArtsAtOnce:
+WORD CAS_NumberOfActiveArtsAtOnce
+
+#include "source/CombatArts.lyn/event"
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"
