@@ -6,6 +6,7 @@
 #define ART_ID_FROM_MENUDEF(def) ( (u16)((u32)((def)->name) & 0xFFFF) )
 
 u8 CombatArtGeneralAttackingUsability();
+u8 CombatArtGeneralAttackingEffect(struct MenuProc* menu, struct MenuItemProc* menuItem);
 
 void TargetOtherDef(struct BattleUnit* actor, struct BattleUnit* target);
 void TryDealEffectiveDamage(struct BattleUnit* actor, struct BattleUnit* target, const u8* effectivenessPtr);

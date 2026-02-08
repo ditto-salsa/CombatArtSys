@@ -41,6 +41,15 @@ u8 CombatArtGeneralAttackingUsability() {
     return FALSE;
 }
 
+u8 CombatArtGeneralAttackingEffect(struct MenuProc* menu, struct MenuItemProc* menuItem){
+
+    SetActiveArt(gActiveUnit, ART_ID_FROM_MENUDEF(menuItem->def));
+
+    ResetIconGraphics();
+    LoadIconPalettes(4);
+    return StartUnitWeaponSelect(menu, menuItem);
+}
+
 
 // Use in Prebattle Functions
 

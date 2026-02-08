@@ -4,7 +4,7 @@
 
 // bool
 u8 ArtTester(struct Unit* unit, u16 artID){
-    return CombatArtList[artID].usability(unit, artID);
+    return CombatArtList[artID].usability == NULL ? False : CombatArtList[artID].usability(unit, artID);
 }
 
 u16 GetActiveArt(struct Unit* unit){
@@ -18,7 +18,6 @@ void SetActiveArt(struct Unit* unit, u16 artID){
 
 // Function iterators to be put into calc loops
 void CombatArtPrebattleFuncWrapper(struct BattleUnit* actor, struct BattleUnit* target){
-    if (actor == &gBattleActor) return;
     if (GetActiveArt(&actor->unit) == 0xFFFF) return;
 
     if (CombatArtList[GetActiveArt(&actor->unit)].preBattleFunction != NULL)

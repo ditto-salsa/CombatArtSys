@@ -10,7 +10,7 @@ ALIGN 4; CombatArtDurabilityList: FILL 0x181
 	Leave any field as 0 that you are not using (aside from Name, as that being 0 will cause issues)
 
 	Example:
-	CombatArt(0, \ // ID
+	CombatArt(1, \ // ID
 			  john, \ // Name
 			  jones, \ // Desc
 			  3, \ // Durability Cost
@@ -24,136 +24,136 @@ ALIGN 4; CombatArtDurabilityList: FILL 0x181
 			  aaaaaaaaaaaa) // Range Function
 */
 
-CombatArt(0, \
+CombatArt(1, \
 		  0x212, \
 		  0x212, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  0)
 	
-CombatArt(1, \
-		  0x213, \
-		  0x213, \
-		  3, \
-		  BigAtkArtUsability, \
-		  BigAtkArtMenuUsability, \
-		  0, \
-		  BigAtkArtEffect, \
-		  0, \
-		  0, \
-		  0, \
-		  0)
-
 CombatArt(2, \
-		  0x214, \
-		  0x214, \
+		  0x213, \
+		  0x213, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 
 CombatArt(3, \
-		  0x216, \
-		  0x216, \
+		  0x214, \
+		  0x214, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 
 CombatArt(4, \
-		  0x215, \
-		  0x215, \
+		  0x216, \
+		  0x216, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 
 CombatArt(5, \
+		  0x215, \
+		  0x215, \
+		  3, \
+		  BigAtkArtUsability, \
+		  BigAtkArtMenuUsability, \
+		  0, \
+		  CombatArtGeneralAttackingEffect, \
+		  0, \
+		  0, \
+		  0, \
+		  0)
+
+CombatArt(6, \
 		  0x217, \
 		  0x217, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 		
-CombatArt(6, \
-		  0x218, \
-		  0x218, \
-		  3, \
-		  BigAtkArtUsability, \
-		  BigAtkArtMenuUsability, \
-		  0, \
-		  BigAtkArtEffect, \
-		  0, \
-		  0, \
-		  0, \
-		  0)
-		  
 CombatArt(7, \
-		  0x219, \
-		  0x219, \
+		  0x218, \
+		  0x218, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 		  
 CombatArt(8, \
-		  0x21A, \
-		  0x21A, \
+		  0x219, \
+		  0x219, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
-		  BigAtkArtPreBattle, \
+		  CombatArtGeneralAttackingEffect, \
+		  0, \
 		  0, \
 		  0, \
 		  0)
 		  
 CombatArt(9, \
+		  0x21A, \
+		  0x21A, \
+		  3, \
+		  BigAtkArtUsability, \
+		  BigAtkArtMenuUsability, \
+		  0, \
+		  CombatArtGeneralAttackingEffect, \
+		  BigAtkArtPreBattle, \
+		  0, \
+		  0, \
+		  0)
+		  
+CombatArt(10, \
 		  0x21B, \
 		  0x21B, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  BigAtkArtEffect, \
+		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
 		  0)
 		  
 
-CombatArt(10, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
+CombatArt(11, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
 CombatArt(0x180,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
