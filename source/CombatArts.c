@@ -7,8 +7,12 @@ u8 ArtTester(struct Unit* unit, u16 artID){
     return CombatArtList[artID].usability == NULL ? False : CombatArtList[artID].usability(unit, artID);
 }
 
-u16 GetActiveArt(struct Unit* unit){
-    return unit->index >= NumberOfActiveArtsAtOnce ? 0xFFFF : gActiveArts[unit->index];
+u16 __attribute__ ((noinline)) GetActiveArt(struct Unit* unit){
+	if (unit->index == 0) return 0xFFFF;
+	if (unit->index >= NumberOfActiveArtsAtOnce) return 0xFFFF;
+	u16 artID = gActiveArts[unit->index];
+	if (artID > 0x17f) return 0xFFFF;
+    return  artID; 
 }
 
 void SetActiveArt(struct Unit* unit, u16 artID){
@@ -39,7 +43,7 @@ void CombatArtBattleProcFuncWrapper(struct BattleUnit* actor, struct BattleUnit*
 }
 
 int CombatArtRangeFuncWrapper(struct Unit* unit, int itemID, int rangeWord){
-
+	
     if (GetActiveArt(unit) == 0xFFFF) return rangeWord;
 
     return CombatArtList[GetActiveArt(unit)].rangeFunction == NULL 
