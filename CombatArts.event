@@ -41,14 +41,14 @@ CombatArt(2, \
 		  0x213, \
 		  0x213, \
 		  3, \
-		  BigAtkArtUsability, \
-		  BigAtkArtMenuUsability, \
+		  BigRangeAtkArtUsability, \
+		  BigRangeAtkArtMenuUsability, \
 		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
-		  0)
+		  BigAtkArtRange)
 
 CombatArt(3, \
 		  0x214, \

@@ -4,6 +4,7 @@
 #include "gba/types.h"
 #include "proc.h"
 #include "types.h"
+#include <stdbool.h>
 
 // ??? RomHeaderNintendoLogo(???);
 // ??? crt0(???);

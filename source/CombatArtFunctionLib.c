@@ -2,6 +2,67 @@
 
 // Contains "helper" functions to be used in user code for combat arts
 
+void MakeTargetListForWeaponRange(struct Unit* unit, int minRange, int maxRange) {
+
+    int x = unit->xPos;
+    int y = unit->yPos;
+
+    gSubjectUnit = unit;
+
+    InitTargets(x, y);
+
+    BmMapFill(gBmMapRange, 0);
+
+    MapAddInBoundedRange(x, y, minRange, maxRange);
+
+    ForEachUnitInRange(AddUnitToTargetListIfNotAllied);
+
+//    TryAddTrapsToTargetList();
+
+    return;
+}
+
+u8 CombatArtRangeAttackingUsability(int minRange, int maxRange) {
+    
+    // AttackCommandUsability but modified
+    if (gActiveUnit->state & US_HAS_MOVED) {
+        return FALSE;
+    }
+
+    if (gActiveUnit->state & US_IN_BALLISTA) {
+        return FALSE;
+    }
+
+    for (int i = 0; i < UNIT_ITEM_COUNT; i++) {
+        int item = gActiveUnit->items[i];
+
+        if (item == 0) {
+            break;
+        }
+
+        if (!(GetItemAttributes(item) & IA_WEAPON)) {
+            continue;
+        }
+
+        if (!CanUnitUseWeaponNow(gActiveUnit, item)) {
+            continue;
+        }
+        // Durability cost check for art
+        //if (CombatArtDurabilityList[gActiveArtID] > ITEM_USES(item)){}
+
+        MakeTargetListForWeaponRange(gActiveUnit, minRange, maxRange);
+        if (GetSelectTargetCount() == 0) {
+            continue;
+        }
+
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+
+
 u8 CombatArtGeneralAttackingUsability() {
     
     // AttackCommandUsability but modified
