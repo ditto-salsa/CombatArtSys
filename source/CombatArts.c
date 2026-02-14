@@ -8,10 +8,10 @@ u8 ArtTester(struct Unit* unit, u16 artID){
 }
 
 u16 __attribute__ ((noinline)) GetActiveArt(struct Unit* unit){
-	if (unit->index == 0) return 0xFFFF;
-	if (unit->index >= NumberOfActiveArtsAtOnce) return 0xFFFF;
+	if (unit->index == 0) return 0;
+	if (unit->index >= NumberOfActiveArtsAtOnce) return 0;
 	u16 artID = gActiveArts[unit->index];
-	if (artID > 0x17f) return 0xFFFF;
+	if (artID > 0x17f) return 0;
     return  artID; 
 }
 
@@ -22,21 +22,25 @@ void SetActiveArt(struct Unit* unit, u16 artID){
 
 // Function iterators to be put into calc loops
 void CombatArtPrebattleFuncWrapper(struct BattleUnit* actor, struct BattleUnit* target){
-    if (GetActiveArt(&actor->unit) == 0xFFFF) return;
+    if (GetActiveArt(&actor->unit) == 0) return;
 
     if (CombatArtList[GetActiveArt(&actor->unit)].preBattleFunction != NULL)
         CombatArtList[GetActiveArt(&actor->unit)].preBattleFunction(GetActiveArt(&actor->unit), actor, target);
 }
 
 void CombatArtPostbattleFuncWrapper(struct Unit* actor, struct Unit* target, struct ActionData* actionData){
-    if (GetActiveArt(actor) == 0xFFFF) return;
+    if (GetActiveArt(actor) == 0) return;
 
     if (CombatArtList[GetActiveArt(actor)].postBattleFunction != NULL)
         CombatArtList[GetActiveArt(actor)].postBattleFunction(GetActiveArt(actor), actor, target, actionData);
+	//clear active art by default
+    else {
+		 SetActiveArt(actor, 0);
+	}
 }
 
 void CombatArtBattleProcFuncWrapper(struct BattleUnit* actor, struct BattleUnit* target, struct BattleHit* hitIterator, struct BattleStats* stats){
-    if (GetActiveArt(&actor->unit) == 0xFFFF) return;
+    if (GetActiveArt(&actor->unit) == 0) return;
 
     if (CombatArtList[GetActiveArt(&actor->unit)].battleProcFunction != NULL) 
         CombatArtList[GetActiveArt(&actor->unit)].battleProcFunction(GetActiveArt(&actor->unit), actor, target, hitIterator, stats);
@@ -44,7 +48,7 @@ void CombatArtBattleProcFuncWrapper(struct BattleUnit* actor, struct BattleUnit*
 
 int CombatArtRangeFuncWrapper(struct Unit* unit, int itemID, int rangeWord){
 	
-    if (GetActiveArt(unit) == 0xFFFF) return rangeWord;
+    if (GetActiveArt(unit) == 0) return rangeWord;
 
     return CombatArtList[GetActiveArt(unit)].rangeFunction == NULL 
         ? rangeWord 

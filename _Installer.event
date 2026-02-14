@@ -70,6 +70,7 @@ WORD CAS_NumberOfActiveArtsAtOnce
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"
+#include "source/VanillaFuncs.lyn.event"
 
 // RedrawMenu edit: `name` field of MenuItemDef is no longer used, ever
 PUSH
