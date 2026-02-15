@@ -41,6 +41,7 @@ POIN 0x176E9
 #include "CalcLoops/PostbattleCalcLoop.event"
 #include "CalcLoops/BattleProcCalcLoop.event"
 #include "CalcLoops/RangeCalcLoop.event"
+//#include "CalcLoops/FollowUpOrderCalcLoop.event"
 
 // Menus
 #include "MenuDefs/_Installer.event"
@@ -57,6 +58,9 @@ ALIGN 4
 	ERROR "The upper limit for the number of arts in the menu at once is 11 because that's how fegba menus work okay?"
 #endif
 
+MaxIDOfArtsInList:
+WORD CAS_MaxIDOfArtsInList
+
 NumberOfArtsInMenuAtOnce:
 WORD CAS_NumberOfArtsInMenuAtOnce
 
@@ -67,6 +71,7 @@ NumberOfActiveArtsAtOnce:
 WORD CAS_NumberOfActiveArtsAtOnce
 
 #include "source/CombatArts.lyn.event"
+#include "source/CalcLoops.lyn.event"
 #include "source/CombatArtsMenus.lyn.event"
 #include "source/CombatArtFunctionLib.lyn.event"
 #include "source/TestingCombatArts.lyn.event"

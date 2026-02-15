@@ -21,6 +21,9 @@
 // Lower values may cause issues with longer menu option names, so beware!
 #define MapMenuWidth 9
 
+// Maximum number of arts in the CombatArtList
+#define CAS_MaxIDOfArtsInList 0x17F
+
 // RAM usage is calculated based on these constants; please make sure you don't exceed freespace if changing these
 // Starting RAM address for the large block of used RAM
 #define CAS_RAM_START 0x02026E30 // size of freespace is 0x2028

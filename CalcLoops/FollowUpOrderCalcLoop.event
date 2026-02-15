@@ -1,0 +1,17 @@
+ALIGN 4; FollowUpOrderFunctions: // Make sure to set THUMB bit if running THUMB code!
+WORD 0 // Terminator
+
+
+
+
+
+
+// Hook & Code
+PUSH
+ORG 0x2AF90
+jumpToHack(r2, FollowUpOrderCalcLoop)
+POP
+
+ThumbFunc(FollowUpOrderCalcLoop)
+#incbin "asm/FollowUpOrderCalcLoop.bin"
+POIN FollowUpOrderFunctions

@@ -2,8 +2,8 @@
 "PUSH; ORG CombatArtList+(id*0x24); \
 SHORT name desc; POIN usability menu_usability menu_draw menu_effect prebattle postbattle battleproc rangefunc; \
 ORG CombatArtDurabilityList+id; BYTE durabilityCost; POP"
-ALIGN 4; CombatArtList: FILL 0x24*0x181
-ALIGN 4; CombatArtDurabilityList: FILL 0x181
+ALIGN 4; CombatArtList: FILL 0x24*(CAS_MaxIDOfArtsInList + 2)
+ALIGN 4; CombatArtDurabilityList: FILL (CAS_MaxIDOfArtsInList + 2)
 
 /*
 	List of combat arts, appear in menus in the order they are here
@@ -156,4 +156,4 @@ CombatArt(10, \
 		  
 
 CombatArt(11, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
-CombatArt(0x180,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
+CombatArt(CAS_MaxIDOfArtsInList + 1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
