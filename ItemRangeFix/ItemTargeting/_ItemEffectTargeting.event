@@ -33,7 +33,7 @@
 	#incbin "ItemRangeBuilder.dmp"
 	POIN GetItemRange|1 CheckTilesInRange|1 FillRange|1 Is_Capture_Set|1
 	*/
-	GetItemRange:
+	PUSH; ORG CURRENTOFFSET+$1; GetItemRange: POP
 	#include "ItemRangeGetter.lyn.event"
 	//#incbin "ItemRangeGetter.dmp"
 	POIN RangeCalcGetter
