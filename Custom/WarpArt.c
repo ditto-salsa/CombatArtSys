@@ -2,7 +2,7 @@
 
 u8 WarpArtUsability(struct Unit* unit, u16 artID)
 {
-    return HasSelectTarget(unit, MakeTargetListForWarp) && ArtItemCheckInventory(unit, artID);
+    return HasSelectTarget(unit, MakeTargetListForWarp) ;//&& ArtItemCheckInventory(unit, artID);
 }
 
 u8 WarpArtMenuUsability(const struct MenuItemDef* def, int number)

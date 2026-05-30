@@ -1,5 +1,5 @@
 #define CombatArt(id,name, desc, durabilityCost, usability, menu_usability, menu_draw, menu_effect, item_select_usability, item_select_effect, prebattle, postbattle, battleproc, rangefunc) \
-"PUSH; ORG CombatArtList+(id*0x2C); \
+"PUSH; ORG CombatArtList+((id)*0x2C); \
 SHORT name desc; POIN usability menu_usability menu_draw menu_effect item_select_usability item_select_effect prebattle postbattle battleproc rangefunc; \
 ORG CombatArtDurabilityList+id; BYTE durabilityCost; POP"
 ALIGN 4; CombatArtList: FILL 0x2C*(CAS_MaxIDOfArtsInList + 2)
@@ -48,10 +48,10 @@ CombatArt(2, \
 		  BigRangeAtkArtUsability, \
 		  BigRangeAtkArtMenuUsability, \
 		  0, \
-		  0, \
-		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
+		  0, \
+		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  BigAtkArtRange)
@@ -63,10 +63,10 @@ CombatArt(3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+          CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
-		  0, \
+		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  0)
@@ -78,9 +78,9 @@ CombatArt(4, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+          CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
@@ -93,9 +93,9 @@ CombatArt(5, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+          CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
@@ -108,9 +108,9 @@ CombatArt(6, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+          CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
@@ -123,9 +123,9 @@ CombatArt(7, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+	      CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
@@ -138,9 +138,9 @@ CombatArt(8, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+	      CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
 		  0, \
@@ -153,9 +153,9 @@ CombatArt(9, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  0, \
-		  0, \
 		  CombatArtGeneralAttackingEffect, \
+		  0, \
+		  0, \
 		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
@@ -168,14 +168,14 @@ CombatArt(10, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
-		  0, \
-		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
+		  0, \
+		  BigAtkArtPreBattle, \
 		  0, \
 		  0, \
 		  0)
 		  
 
 CombatArt(11, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
-CombatArt(CAS_MaxIDOfArtsInList + 1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
+CombatArt((CAS_MaxIDOfArtsInList + 1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
