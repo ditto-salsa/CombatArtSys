@@ -10,7 +10,7 @@ u8 WarpArtMenuUsability(const struct MenuItemDef* def, int number)
     return WarpArtUsability(gActiveUnit, ART_ID_FROM_MENUDEF(def)) ? MENU_ENABLED : MENU_NOTSHOWN;
 }
 
-u8 WarpArtEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
+u8 WarpArtMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
 {
     SetActiveArt(gActiveUnit, ART_ID_FROM_MENUDEF(menuItem->def));
     StartUnitItemSelect(menu, menuItem);
@@ -18,12 +18,12 @@ u8 WarpArtEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
     return MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A | MENU_ACT_CLEAR;
 }
 
-u8 WarpArtItemMenuUsability(u16 artID, u16 item)
+u8 WarpArtItemSelectUsability(u16 artID, u16 item)
 {
     return GetItemType(item) == ITYPE_STAFF;
 }
 
-void WarpArtItemEffect(u16 artID, struct Unit* unit)
+void WarpArtItemSelectEffect(u16 artID, struct Unit* unit)
 {
     DoUseWarpStaff(unit);
 }
