@@ -9,7 +9,7 @@ void ForEachUnitInRange(void(* func)(struct Unit * unit));
 // ??? sub_8024FD8(???);
 // ??? ForEachPosIn12Range(???);
 // ??? ForEachUnitInMagBy2Range(???);
-// ??? TryAddTrapsToTargetList(???);
+void TryAddTrapsToTargetList(void);
 void AddUnitToTargetListIfNotAllied(struct Unit * unit);
 void MakeTargetListForWeapon(struct Unit* unit, int item);
 // ??? TryAddUnitToTradeTargetList(???);

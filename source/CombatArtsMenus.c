@@ -148,3 +148,30 @@ void CAMenu_ScrollMenuDefsDown(struct MenuProc* proc){
 
     }
 }
+
+u8 CAS_ItemSelectMenu_Usability(const struct MenuItemDef* def, int number)
+{
+    return gActiveUnit->items[number] ? CombatArtList[GetActiveArt(gActiveUnit)].itemSelectUsability(GetActiveArt(gActiveUnit), gActiveUnit->items[number]) ? MENU_ENABLED : MENU_DISABLED : MENU_NOTSHOWN;
+}
+
+int CAS_ItemSelectMenu_Draw(struct MenuProc* menu, struct MenuItemProc* menuItem)
+{
+    DrawItemMenuLine(
+        &menuItem->text,
+        gActiveUnit->items[menuItem->itemNumber],
+        CombatArtList[GetActiveArt(gActiveUnit)].itemSelectUsability(GetActiveArt(gActiveUnit), gActiveUnit->items[menuItem->itemNumber]),
+        gBG0TilemapBuffer + TILEMAP_INDEX(menuItem->xTile, menuItem->yTile)
+    );
+
+    return 0;
+}
+
+u8 CAS_ItemSelectMenu_Effect(struct MenuProc* menu, struct MenuItemProc* menuItem)
+{
+    EquipUnitItemSlot(gActiveUnit, menuItem->itemNumber);
+    gActionData.itemSlotIndex = 0;
+
+    CombatArtList[GetActiveArt(gActiveUnit)].itemSelectEffect(GetActiveArt(gActiveUnit), gActiveUnit);
+
+    return MENU_ACT_SKIPCURSOR | MENU_ACT_END | MENU_ACT_SND6A;
+}

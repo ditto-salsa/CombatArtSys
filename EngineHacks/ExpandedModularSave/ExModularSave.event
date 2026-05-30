@@ -81,7 +81,7 @@ gSaveBlockTypeSizeLookup:
 #include "SrcCore/MSaFuncs.lyn.event" // Core save modules
 #include "SrcCore/MSuFuncs.lyn.event" // Core suspend modules
 
-#include "SrcModules/Debuffs.lyn.event" // Debuffs module
+//#include "SrcModules/Debuffs.lyn.event" // Debuffs module
 #include "SrcModules/ReadWriteSupplyItems.lyn.event" // Convoy module
 
 #ifdef USE_STRMAG_SPLIT
@@ -99,8 +99,8 @@ gSaveBlockTypeSizeLookup:
 	#endif // STAIRS_ASM
 #endif // USE_STRMAG_SPLIT
 
-DebuffTablePointer: // required for debuffs module
-	WORD DebuffTableRam
+//DebuffTablePointer: // required for debuffs module
+	//WORD DebuffTableRam
 
 // ===============
 // = SAVE CHUNKS =
@@ -195,21 +195,16 @@ gSuspendSaveChunks:
 	DeclSaveChunk($1F8D, $0460, ESU_SaveGreenSuspendUnits,  ESU_LoadGreenSuspendUnits)
 
 	// Save Debuffs (TODO: maybe reduce size)
-	DeclSaveChunk($23ED, DebuffTableSize, SUD_SaveDebuffs,  SUD_LoadDebuffs)
+	//DeclSaveChunk($23ED, DebuffTableSize, SUD_SaveDebuffs,  SUD_LoadDebuffs)
 
 	// Permanent eids (moved here because of a mistake in the previous allocation)
-	DeclSaveChunk($282D, $0019, $0A3150+1, $0A3198+1)
+	DeclSaveChunk($23ED, $0019, $0A3150+1, $0A3198+1)
 
-	// $25AA
-	DeclSaveChunk($2846, $00C8, MSa_WriteSupplyItems, MSa_ReadSupplyItems)  // Convoy Items
+	DeclSaveChunk($2406, $00C8, MSa_WriteSupplyItems, MSa_ReadSupplyItems)  // Convoy Items
 	
-	// $290E
-	DeclSaveChunk($290E, CAS_NumberOfActiveArtsAtOnce * 2, CAS_EMS_WriteActiveArts, CAS_EMS_ReadActiveArts)
+	DeclSaveChunk($24CE, CAS_NumberOfActiveArtsAtOnce * 2, CAS_EMS_WriteActiveArts, CAS_EMS_ReadActiveArts)
 	
-	// (following numbers have CAS_NumberOfActiveArtsAtOnce as 0xC0 which you CAN change but idk why you would.)
-	// end at $2A8E
-	
-	// free up to $2E78 ($3EA free bytes)
+	// free up to $ ($ free bytes)
 
 	DeclSaveChunk(0, 0, 0, MSu_LoadClaimFlagsFromParentSave) // Load Bonus Claim flags from parent save
 

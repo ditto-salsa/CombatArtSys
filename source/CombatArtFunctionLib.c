@@ -17,7 +17,7 @@ void MakeTargetListForWeaponRange(struct Unit* unit, int minRange, int maxRange)
 
     ForEachUnitInRange(AddUnitToTargetListIfNotAllied);
 
-//    TryAddTrapsToTargetList();
+    TryAddTrapsToTargetList();
 
     return;
 }
@@ -48,7 +48,9 @@ u8 CombatArtRangeAttackingUsability(int minRange, int maxRange) {
             continue;
         }
         // Durability cost check for art
-        //if (CombatArtDurabilityList[gActiveArtID] > ITEM_USES(item)){}
+        if (CombatArtDurabilityList[GetActiveArt(gActiveUnit)] > ITEM_USES(item)){
+            continue;
+        }
 
         MakeTargetListForWeaponRange(gActiveUnit, minRange, maxRange);
         if (GetSelectTargetCount() == 0) {
@@ -88,8 +90,11 @@ u8 CombatArtGeneralAttackingUsability() {
         if (!CanUnitUseWeaponNow(gActiveUnit, item)) {
             continue;
         }
+
         // Durability cost check for art
-        //if (CombatArtDurabilityList[gActiveArtID] > ITEM_USES(item)){}
+        if (CombatArtDurabilityList[GetActiveArt(gActiveUnit)] > ITEM_USES(item)){
+            continue;
+        }
 
         MakeTargetListForWeapon(gActiveUnit, item);
         if (GetSelectTargetCount() == 0) {
@@ -111,6 +116,24 @@ u8 CombatArtGeneralAttackingEffect(struct MenuProc* menu, struct MenuItemProc* m
     return StartUnitWeaponSelect(menu, menuItem);
 }
 
+u8 ArtItemCheckInventory(struct Unit* unit, u16 artID)
+{
+    u8 valid = False;
+    for (int i = 0; i < UNIT_ITEM_COUNT; i++)
+    {
+        valid |= CombatArtList[artID].itemSelectUsability(artID, unit->items[i]);
+    }
+    return valid;
+}
+
+void StartUnitItemSelect(struct MenuProc* menu, struct MenuItemProc* menuItem)
+{
+    ResetIconGraphics();
+    LoadIconPalettes(4);
+    StartFace(0, GetUnitPortraitId(gActiveUnit), 0xB0, 0xC, 2);
+    SetFaceBlinkControlById(0, 5);
+    ForceMenuItemPanel(StartOrphanMenu(&CAS_ItemSelectMenuDef), gActiveUnit, 15, 11);
+}
 
 // Use in Prebattle Functions
 

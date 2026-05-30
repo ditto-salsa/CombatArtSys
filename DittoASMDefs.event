@@ -3,179 +3,106 @@
 
 #include "Extensions/Hack Installation.txt"
 
+// Any macros that write ARM instructions are prefixed with ARM_
+// Macros such as jumpToARMHack are for jumping to ARM code from THUMB.
+
 #define ThumbFunc(label) "ALIGN 4; PUSH; ORG CURRENTOFFSET+1; label: POP"
 
+// Thumb macros
+
 #define jumpToHack(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)) ((1000111b << 8)|(reg << 3)); POIN (ptr|1)"
-#define jumpToHackARM(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)) ((1000111b << 8)|(reg << 3)); POIN (ptr)"
+#define jumpToARMHack(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)) ((1000111b << 8)|(reg << 3)); POIN (ptr)"
 #define callHack(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)|1); BL((0xD18C0 + (reg * 4))); SHORT 0xE001; POIN (ptr|1)"
-#define callHackARM(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)|1); BL((0xD18C0 + (reg * 4))); SHORT 0xE001; POIN (ptr)"
+#define callARMHack(reg,ptr) "SHORT ((1001b << 11)|(reg << 8)|1); BL((0xD18C0 + (reg * 4))); SHORT 0xE001; POIN (ptr)"
 
-#ifndef r0
-    #define r0 0
-#else
-    #if r0 != 0
-        #define r0 0
-        MESSAGE "why don't you have r0 = 0 anyway lmao"
-    #endif
-#endif
+// Arm macros
 
-#ifndef r1
-    #define r1 1
-#else
-    #if r1 != 1
-        #define r1 1
-        MESSAGE "why don't you have r1 = 1 anyway lmao"
-    #endif
-#endif
+#define ARM_BL(cond, to) "WORD ((cond << 28)|(1011b << 24)|(ptr >> 2))"
+#define ARM_BL(to) ARM_BL(AL, to)
 
-#ifndef r2
-    #define r2 2
-#else
-    #if r2 != 2
-        #define r2 2
-        MESSAGE "why don't you have r2 = 2 anyway lmao"
-    #endif
-#endif
+#define ARM_jumpToHack(reg, ptr) "WORD ((14 << 28)|(01011001b << 20)|(15 << 16)|(reg << 12)) ((14 << 28)|(000100101111111111110001b << 4)|(reg)); POIN (ptr|1)"
+#define ARM_jumpToARMHack(reg, ptr) "WORD ((14 << 28)|(01011001b << 20)|(15 << 16)|(reg << 12)) ((14 << 28)|(000100101111111111110001b << 4)|(reg)); POIN (ptr)"
+//#define ARM_callHack(cond, reg, ptr)
+//#define ARM_callARMHack(cond, reg, ptr)
 
-#ifndef r3
-    #define r3 3
-#else
-    #if r3 != 3
-        #define r3 3
-        MESSAGE "why don't you have r3 = 3 anyway lmao"
-    #endif
-#endif
+// Registers
+#undef r0
+#define r0 0
+#undef r1
+#define r1 1
+#undef r2
+#define r2 2
+#undef r3
+#define r3 3
+#undef r4
+#define r4 4
+#undef r5
+#define r5 5
+#undef r6
+#define r6 6
+#undef r7
+#define r7 7
+#undef r8
+#define r8 8
+#undef r9
+#define r9 9
+#undef r10
+#define r10 10
+#undef r11
+#define r11 11
+#undef r12
+#define r12 12
+#undef r13
+#define r13 13
+#undef r14
+#define r14 14
+#undef r15
+#define r15 15
+#undef sl
+#define sl r10
+#undef fp
+#define fp r11
+#undef ip
+#define ip r12
+#undef sp
+#define sp r13
+#undef lr
+#define lr r14
+#undef pc
+#define pc r15
 
-#ifndef r4
-    #define r4 4
-#else
-    #if r4 != 4
-        #define r4 4
-        MESSAGE "why don't you have r4 = 4 anyway lmao"
-    #endif
-#endif
-
-#ifndef r5
-    #define r5 5
-#else
-    #if r5 != 5
-        #define r5 5
-        MESSAGE "why don't you have r5 = 5 anyway lmao"
-    #endif
-#endif
-
-#ifndef r6
-    #define r6 6
-#else
-    #if r6 != 6
-        #define r6 6
-        MESSAGE "why don't you have r6 = 6 anyway lmao"
-    #endif
-#endif
-
-#ifndef r7
-    #define r7 7
-#else
-    #if r7 != 7
-        #define r7 7
-        MESSAGE "why don't you have r7 = 7 anyway lmao"
-    #endif
-#endif
-
-#ifndef r8
-    #define r8 8
-#else
-    #if r8 != 8
-        #define r8 8
-        MESSAGE "why don't you have r8 = 8 anyway lmao"
-    #endif
-#endif
-
-#ifndef r9
-    #define r9 9
-#else
-    #if r9 != 9
-        #define r9 9
-        MESSAGE "why don't you have r9 = 9 anyway lmao"
-    #endif
-#endif
-
-#ifndef r10
-    #define r10 10
-#else
-    #if r10 != 10
-        #define r10 10
-        MESSAGE "why don't you have r10 = 10 anyway lmao"
-    #endif
-#endif
-
-#ifndef r11
-    #define r11 11
-#else
-    #if r11 != 11
-        #define r11 11
-        MESSAGE "why don't you have r11 = 11 anyway lmao"
-    #endif
-#endif
-
-#ifndef r12
-    #define r12 12
-#else
-    #if r12 != 12
-        #define r12 12
-        MESSAGE "why don't you have r12 = 12 anyway lmao"
-    #endif
-#endif
-
-#ifndef r13
-    #define r13 13
-#else
-    #if r13 != 13
-        #define r13 13
-        MESSAGE "why don't you have r13 = 13 anyway lmao"
-    #endif
-#endif
-
-#ifndef r14
-    #define r14 14
-#else
-    #if r14 != 14
-        #define r14 14
-        MESSAGE "why don't you have r14 = 14 anyway lmao"
-    #endif
-#endif
-
-#ifndef r15
-    #define r15 15
-#else
-    #if r15 != 15
-        #define r15 15
-        MESSAGE "why don't you have r15 = 15 anyway lmao"
-    #endif
-#endif
-
-#ifndef sl
-	#define sl r10
-#endif
-
-#ifndef fp
-	#define fp r11
-#endif
-
-#ifndef ip
-	#define ip r12
-#endif
-
-#ifndef sp
-	#define sp r13
-#endif
-
-#ifndef lr
-	#define lr r14
-#endif
-
-#ifndef pc
-	#define pc r15
-#endif
+// Conditional codes
+#undef EQ
+#define EQ 0
+#undef NE
+#define NE 1
+#undef HS
+#define HS 2
+#undef LO
+#define LO 3
+#undef MI
+#define MI 4
+#undef PL
+#define PL 5
+#undef VS
+#define VS 6
+#undef VC
+#define VC 7
+#undef HI
+#define HI 8
+#undef LS
+#define LS 9
+#undef GE
+#define GE 10
+#undef LT
+#define LT 11
+#undef GT
+#define GT 12
+#undef LE
+#define LE 13
+#undef AL
+#define AL 14
+#undef NV
+#define NV 15
 
 #endif // DittoASMDefs

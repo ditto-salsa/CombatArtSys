@@ -11,10 +11,14 @@
 // Text
 #include "Text.event" // Adds the necessary text for menus, IDs can be changed here. - Contains the Anti-Huffman engine hack
 
+// Rounds data expansion
+#include "EngineHacks/ExpandingRoundsData.event"
+
 // EMS - to save gActiveArts array on suspend
+#include "EngineHacks/ExpandedModularSave/ExModularSave.event"
 
 // Item Range Fix
-#include "ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.
+#include "EngineHacks/ItemRangeFix/ItemRangeFix.event" // Required for the Range Calc Loop.
 
 ThumbFunc(MovGetter) // put a different mov getter instead of this if you so desire, there just needs to be one that exists to satiate IRF (this replicates vanilla behaviour)
 SHORT 0xB501 // push {r0, r14}
@@ -37,18 +41,18 @@ POIN 0x16B29
 POIN 0x176E9
 
 // Calc Loops
-#include "CalcLoops/PrebattleCalcLoop.event"
-#include "CalcLoops/PostbattleCalcLoop.event"
-#include "CalcLoops/BattleProcCalcLoop.event"
-#include "CalcLoops/RangeCalcLoop.event"
-//#include "CalcLoops/FollowUpOrderCalcLoop.event"
+#include "EngineHacks/CalcLoops/PrebattleCalcLoop.event"
+#include "EngineHacks/CalcLoops/PostbattleCalcLoop.event"
+#include "EngineHacks/CalcLoops/BattleProcCalcLoop.event"
+#include "EngineHacks/CalcLoops/RangeCalcLoop.event"
+//#include "EngineHacks/CalcLoops/FollowUpOrderCalcLoop.event"
 
 // Menus
 #include "MenuDefs/_Installer.event"
 
 // Combat Art data - edit your arts here
-#include "CombatArts.event"
 #include "Custom/_Installer.event"
+#include "CombatArts.event"
 
 // Code
 

@@ -97,3 +97,14 @@ POP
 ALIGN 4; CAMenuDef:
 BYTE 1 3 9 0; WORD 0 CAS_RAM_START 0 0 0; POIN 0x22861 0x4F521 0x4F459
 
+// Item select menu when selecting a non-combat combat art
+ALIGN 4; CAS_ItemSelectMenuDef:
+BYTE 1 1 14 0; WORD 0; POIN CAS_ItemSelectMenuItems; WORD 0 0 0; POIN 0x22861 0x4F521 0x24589
+
+ALIGN 4; CAS_ItemSelectMenuItems:
+WORD 0 0; BYTE 0 0x3E; ALIGN 4; POIN CAS_ItemSelectMenu_Usability CAS_ItemSelectMenu_Draw CAS_ItemSelectMenu_Effect 0 0x23C15 0x23C69
+WORD 0 0; BYTE 0 0x3F; ALIGN 4; POIN CAS_ItemSelectMenu_Usability CAS_ItemSelectMenu_Draw CAS_ItemSelectMenu_Effect 0 0x23C15 0x23C69
+WORD 0 0; BYTE 0 0x40; ALIGN 4; POIN CAS_ItemSelectMenu_Usability CAS_ItemSelectMenu_Draw CAS_ItemSelectMenu_Effect 0 0x23C15 0x23C69
+WORD 0 0; BYTE 0 0x41; ALIGN 4; POIN CAS_ItemSelectMenu_Usability CAS_ItemSelectMenu_Draw CAS_ItemSelectMenu_Effect 0 0x23C15 0x23C69
+WORD 0 0; BYTE 0 0x42; ALIGN 4; POIN CAS_ItemSelectMenu_Usability CAS_ItemSelectMenu_Draw CAS_ItemSelectMenu_Effect 0 0x23C15 0x23C69
+MenuItemsEnd

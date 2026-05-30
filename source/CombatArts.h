@@ -3,7 +3,7 @@
 
 #include "../_include/gbafe.h"
 
-enum {
+enum Bool {
     False,
     True
 };
@@ -15,16 +15,20 @@ struct CombatArt {
     /* 08 */ u8   (*menuUsability)(const struct MenuItemDef*, int number);
     /* 0C */ int  (*menuDraw)(struct MenuProc* menu, struct MenuItemProc* menuItem);
     /* 10 */ u8   (*menuEffect)(struct MenuProc* menu, struct MenuItemProc* menuItem);
-    /* 14 */ void (*preBattleFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target);
-    /* 18 */ void (*postBattleFunction)(u16 artID, struct Unit* actor, struct Unit* target, struct ActionData* actionData);
-    /* 1C */ void (*battleProcFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target, struct BattleHit* hitIterator, struct BattleStats* stats);
-    /* 20 */ int  (*rangeFunction)(u16 artID, struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
+    /* 14 */ u8   (*itemSelectUsability)(u16 artID, u16 item);
+    /* 18 */ void (*itemSelectEffect)(u16 artID, struct Unit* unit);
+    /* 1C */ void (*preBattleFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target);
+    /* 20 */ void (*postBattleFunction)(u16 artID, struct Unit* actor, struct Unit* target, struct ActionData* actionData);
+    /* 24 */ void (*battleProcFunction)(u16 artID, struct BattleUnit* actor, struct BattleUnit* target, struct BattleHit* hitIterator, struct BattleStats* stats);
+    /* 28 */ int  (*rangeFunction)(u16 artID, struct Unit* unit, int itemID, int rangeWord); // Returns modified rangeWord
+    
 };
 
 extern const struct CombatArt CombatArtList[];
 extern const u8 CombatArtDurabilityList[];
 
 extern const struct MenuDef CAMenuDef;
+extern const struct MenuDef CAS_ItemSelectMenuDef;
 extern const int MaxIDOfArtsInList;
 extern const int NumberOfArtsInMenuAtOnce;
 extern const int NumberOfUsableArtsAtOnce;
@@ -62,6 +66,9 @@ u8 UM_CombatArtsMenuEffect(struct MenuProc* menu, struct MenuItemProc* menuItem)
 void BuildCombatArtsMenuItemDef(u8 usableArtIndex, struct MenuItemDef* loc);
 void CAMenu_ScrollMenuDefsUp(struct MenuProc* proc);
 void CAMenu_ScrollMenuDefsDown(struct MenuProc* proc);
+u8 CAS_ItemSelectMenu_Usability(const struct MenuItemDef* def, int number);
+int CAS_ItemSelectMenu_Draw(struct MenuProc* menu, struct MenuItemProc* menuItem);
+u8 CAS_ItemSelectMenu_Effect(struct MenuProc* menu, struct MenuItemProc* menuItem);
 
 // CombatArtFunctionLib.c functions
 #include "CombatArtFunctionLib.h"

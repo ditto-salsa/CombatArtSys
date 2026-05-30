@@ -1,8 +1,8 @@
-#define CombatArt(id,name, desc, durabilityCost, usability, menu_usability, menu_draw, menu_effect, prebattle, postbattle, battleproc, rangefunc) \
-"PUSH; ORG CombatArtList+(id*0x24); \
-SHORT name desc; POIN usability menu_usability menu_draw menu_effect prebattle postbattle battleproc rangefunc; \
+#define CombatArt(id,name, desc, durabilityCost, usability, menu_usability, menu_draw, menu_effect, item_select_usability, item_select_effect, prebattle, postbattle, battleproc, rangefunc) \
+"PUSH; ORG CombatArtList+(id*0x2C); \
+SHORT name desc; POIN usability menu_usability menu_draw menu_effect item_select_usability item_select_effect prebattle postbattle battleproc rangefunc; \
 ORG CombatArtDurabilityList+id; BYTE durabilityCost; POP"
-ALIGN 4; CombatArtList: FILL 0x24*(CAS_MaxIDOfArtsInList + 2)
+ALIGN 4; CombatArtList: FILL 0x2C*(CAS_MaxIDOfArtsInList + 2)
 ALIGN 4; CombatArtDurabilityList: FILL (CAS_MaxIDOfArtsInList + 2)
 
 /*
@@ -18,21 +18,25 @@ ALIGN 4; CombatArtDurabilityList: FILL (CAS_MaxIDOfArtsInList + 2)
 			  epicpointer, \ // Menu Usability (usually is a wrapper for General Usability to return a MENU_X enum value)
 			  omgpointerhi, \ // Menu Draw
 			  epicpointer2, \ // Menu Effect
+			  woahhhpointer, \ // Item Select Menu Usability
+			  retniopointer, \ // Item Select Menu Effect
 			  somewhatepicpointer, \ // Pre Battle Function
 			  againapointer, \ // Post Battle Function
 			  fifthhack, \ // Battle Proc Function
-			  aaaaaaaaaaaa) // Range Function
+			  aaaaaaaaaaaa) \ // Range Function
 */
 
 CombatArt(1, \
 		  0x212, \
 		  0x212, \
 		  3, \
-		  BigAtkArtUsability, \
-		  BigAtkArtMenuUsability, \
+		  WarpArtUsability, \
+		  WarpArtMenuUsability, \
 		  0, \
-		  CombatArtGeneralAttackingEffect, \
-		  BigAtkArtPreBattle, \
+		  WarpArtMenuEffect, \
+		  WarpArtItemSelectUsability, \
+		  WarpArtItemSelectEffect, \
+		  0, \
 		  0, \
 		  0, \
 		  0)
@@ -43,6 +47,8 @@ CombatArt(2, \
 		  3, \
 		  BigRangeAtkArtUsability, \
 		  BigRangeAtkArtMenuUsability, \
+		  0, \
+		  0, \
 		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
@@ -57,6 +63,8 @@ CombatArt(3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+		  0, \
+		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
@@ -69,6 +77,8 @@ CombatArt(4, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
+		  0, \
+		  0, \
 		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
@@ -83,6 +93,8 @@ CombatArt(5, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+		  0, \
+		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
@@ -95,6 +107,8 @@ CombatArt(6, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
+		  0, \
+		  0, \
 		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
@@ -109,6 +123,8 @@ CombatArt(7, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+		  0, \
+		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
@@ -121,6 +137,8 @@ CombatArt(8, \
 		  3, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
+		  0, \
+		  0, \
 		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
@@ -135,6 +153,8 @@ CombatArt(9, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+		  0, \
+		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  BigAtkArtPreBattle, \
 		  0, \
@@ -148,6 +168,8 @@ CombatArt(10, \
 		  BigAtkArtUsability, \
 		  BigAtkArtMenuUsability, \
 		  0, \
+		  0, \
+		  0, \
 		  CombatArtGeneralAttackingEffect, \
 		  0, \
 		  0, \
@@ -155,5 +177,5 @@ CombatArt(10, \
 		  0)
 		  
 
-CombatArt(11, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
-CombatArt(CAS_MaxIDOfArtsInList + 1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
+CombatArt(11, /* Early Terminator, make the ID for this be after your last entry to speed up searching through each art */ (-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1))
+CombatArt(CAS_MaxIDOfArtsInList + 1,(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1),(-1)) // Terminator, last art ID is 0x17F unless the list is expanded
